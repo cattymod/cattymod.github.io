@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CattyMod</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+
+  <!-- Hero Section -->
+  <header class="text-center py-24 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+    <h1 class="text-5xl md:text-6xl font-bold mb-6">
+      😺 <span class="text-blue-400">Catty</span>Mod
+    </h1>
+    <p class="text-gray-400 text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+      A complete suite of tools — what we call <span class="text-orange-500">CattyServices</span> — designed for creators, developers, and enthusiasts alike.
+    </p>
+    <a href="hub" class="bg-orange-500 hover:bg-orange-600 text-white px-10 py-4 rounded-lg text-lg font-semibold transition">Get Started</a>
+  </header>
+
+  <!-- About Section -->
+  <section class="max-w-5xl mx-auto my-24 px-6 text-center">
+    <h2 class="text-4xl font-bold mb-6">About CattyMod</h2>
+    <p class="text-gray-300 text-lg md:text-xl leading-relaxed">
+      CattyMod is a full suite of integrated tools, which we call <span class="text-orange-500">CattyServices</span>. 
+      From development tools and Scratch enhancements to Linux utilities and password management, CattyMod provides everything you need in one place.
+    </p>
+  </section>
+
+  <!-- CattyServices Section -->
+  <section id="cattyservices" class="max-w-6xl mx-auto px-6 my-24">
+    <h2 class="text-4xl font-bold text-center mb-12">CattyServices</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+
+      <div class="bg-gray-800 p-8 rounded-xl flex flex-col justify-between">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-500">😸 CattyMod Editor</h3>
+        <p class="text-gray-300">The best Scratch mod for power users 🛠️</p>
+      </div>
+
+      <div class="bg-gray-800 p-8 rounded-xl flex flex-col justify-between">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-500">👶 CattyMod Jr</h3>
+        <p class="text-gray-300">A programming language for young beginners ✨</p>
+      </div>
+
+      <div class="bg-gray-800 p-8 rounded-xl flex flex-col justify-between">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-500">🐧 CattyLinux</h3>
+        <p class="text-gray-300">The perfect Linux distro</p>
+      </div>
+
+      <div class="bg-gray-800 p-8 rounded-xl flex flex-col justify-between">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-500">🎛️ CattyAdmin</h3>
+        <p class="text-gray-300">Admin tools for managing your projects 🗂️</p>
+      </div>
+
+      <div class="bg-gray-800 p-8 rounded-xl flex flex-col justify-between">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-500">📦 CattyMod Packager</h3>
+        <p class="text-gray-300">Package mods easily for sharing 📤</p>
+      </div>
+
+      <div class="bg-gray-800 p-8 rounded-xl flex flex-col justify-between">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-500">👍 ImproveMyScratch</h3>
+        <p class="text-gray-300">Get better at Scratch 🚀</p>
+      </div>
+
+      <div class="bg-gray-800 p-8 rounded-xl flex flex-col justify-between">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-500">🔑 CattyPassword Manager</h3>
+        <p class="text-gray-300">Keep your passwords safe and secure 🛡️</p>
+      </div>
+
+      <div class="bg-gray-800 p-8 rounded-xl flex flex-col justify-between">
+        <h3 class="text-2xl font-semibold mb-4 text-orange-500">🏭 Linux Maker</h3>
+        <p class="text-gray-300">Create your own Linux distributions 🖥️</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Get Started Section -->
+  <section id="get-started" class="bg-gray-800 py-24 text-center">
+    <h2 class="text-4xl font-bold mb-6">Ready to Explore CattyServices?</h2>
+    <p class="text-gray-300 text-lg md:text-xl mb-8 max-w-xl mx-auto">
+      Experience the full suite of CattyServices — all the tools you need for productivity, creativity, and secure management in one place.
+    </p>
+    <a href="https://cattymod.github.io/hub" class="bg-orange-500 hover:bg-orange-600 text-white px-12 py-4 rounded-lg text-xl font-semibold transition">Get Started</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 text-center text-gray-500 text-sm">
+    &copy; 2025 The CattyMod Team 💖  
+    <div class="flex justify-center gap-6 mt-4">
+      <a href="https://github.com/cattymod" target="_blank" class="hover:text-white transition">GitHub</a>
+      <a href="https://scratch.mit.edu/users/Noahscratch493/" target="_blank" class="hover:text-white transition">Scratch</a>
+      <a href="https://www.youtube.com/@Noahscratch493" target="_blank" class="hover:text-white transition">YouTube</a>
+    </div>
+  </footer>
+
+</body>
+</html>
