@@ -12,18 +12,11 @@
 
   /* Sidebar */
   .sidebar {
-    width: 220px;
-    min-width: 220px;
-    max-width: 220px;
-    background:#fff;
-    border-right:1px solid #e5e7eb;
-    display:flex;
-    flex-direction:column;
-    padding:20px;
+    width: 220px; min-width: 220px; max-width: 220px;
+    background:#fff; border-right:1px solid #e5e7eb;
+    display:flex; flex-direction:column; padding:20px;
   }
-  .sidebar h2 {
-    font-size:1.5rem; font-weight:700; margin-bottom:30px; text-align:left;
-  }
+  .sidebar h2 { font-size:1.5rem; font-weight:700; margin-bottom:30px; }
   .sidebar h2 .blue { color:#0ea5e9; }
   .sidebar a {
     display:flex; align-items:center; gap:12px;
@@ -36,7 +29,7 @@
   .sidebar a i { width:20px; text-align:center; }
 
   /* Main content */
-  .main-content { flex-grow:1; display:flex; flex-direction:column; padding:30px; overflow-y:auto; }
+  .main-content { flex-grow:1; padding:30px; overflow-y:auto; }
   .section-title { font-size:1.5rem; font-weight:700; margin-bottom:20px; }
   .dev-content { display:flex; flex-wrap:wrap; gap:30px; }
   .dev-card {
@@ -50,11 +43,24 @@
   .dev-card span { font-weight:600; font-size:0.9rem; text-align:center; }
   .sponsored-badge { position:absolute; top:8px; right:8px; background:#50c878; color:white; font-size:0.65rem; font-weight:600; padding:2px 6px; border-radius:4px; }
 
-  .toggle-container {
-    width:100%; max-width:400px; background:#fff; border-radius:20px; padding:20px;
+  .toggle-container, .cookie-container, .auth-container {
+    width:100%; max-width:500px; background:#fff; border-radius:20px; padding:20px;
     box-shadow:0 8px 20px rgba(0,0,0,0.08); margin-bottom:30px;
   }
   .toggle-container label { display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:1rem; }
+
+  /* Cookie Manager */
+  .cookie-list { margin-top:10px; }
+  .cookie-item { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #e5e7eb; }
+  .cookie-actions button { margin-left:10px; padding:3px 6px; font-size:0.8rem; }
+
+  /* Auth Buttons */
+  .auth-buttons a {
+    display:inline-block; margin:10px 10px 0 0; padding:10px 15px;
+    border-radius:8px; font-weight:600; text-decoration:none; color:white;
+  }
+  .auth-github { background:#333; }
+  .auth-scratch { background:#0ea5e9; }
 </style>
 </head>
 <body>
@@ -64,9 +70,12 @@
   <a class="active" data-section="autologin" onclick="switchSection(this)"><i class="fas fa-toggle-on"></i>Auto-Login</a>
   <a data-section="cdn" onclick="switchSection(this)"><i class="fas fa-box-open"></i>CDN Embeds</a>
   <a data-section="github" onclick="switchSection(this)"><i class="fab fa-github"></i>GitHub Repos</a>
+  <a data-section="cookies" onclick="switchSection(this)"><i class="fas fa-cookie-bite"></i>Cookie Manager</a>
+  <a data-section="auth" onclick="switchSection(this)"><i class="fas fa-user-lock"></i>Authentication</a>
 </div>
 
 <div class="main-content">
+  <!-- Auto Login -->
   <div id="autologin" class="section">
     <div class="section-title">Auto-Login</div>
     <div class="toggle-container">
@@ -77,14 +86,41 @@
     </div>
   </div>
 
+  <!-- CDN Embeds -->
   <div id="cdn" class="section" style="display:none;">
     <div class="section-title">Apps / CDN Embeds</div>
     <div class="dev-content" id="devAppsContainer"></div>
   </div>
 
+  <!-- GitHub Repos -->
   <div id="github" class="section" style="display:none;">
     <div class="section-title">GitHub Repos</div>
     <div class="dev-content" id="devReposContainer"></div>
+  </div>
+
+  <!-- Cookie Manager -->
+  <div id="cookies" class="section" style="display:none;">
+    <div class="section-title">Cookie Manager</div>
+    <div class="cookie-container">
+      <button onclick="refreshCookies()">Refresh Cookies</button>
+      <div class="cookie-list" id="cookieList"></div>
+      <hr style="margin:15px 0;">
+      <input type="text" id="cookieName" placeholder="Cookie Name">
+      <input type="text" id="cookieValue" placeholder="Cookie Value">
+      <button onclick="setCookie()">Set Cookie</button>
+    </div>
+  </div>
+
+  <!-- Authentication -->
+  <div id="auth" class="section" style="display:none;">
+    <div class="section-title">Authentication</div>
+    <div class="auth-container">
+      <p>Login with:</p>
+      <div class="auth-buttons">
+        <a href="https://auth.itinerary.eu.org/auth?redirect=aHR0cHM6Ly9jYXR0eW1vZC5naXRodWIuaW8vbG9naW4vc2NyYXRjaC1jYWxsYmFjay5odG1s&name=CattyMod" target="_blank" class="auth-scratch">Scratch</a>
+        <a href="https://github.com/login/oauth/authorize?client_id=Ov23lici45KmYhC3XthS&redirect_uri=https://cattymod.github.io/login/callback.html" target="_blank" class="auth-github">GitHub</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -93,12 +129,12 @@
     {name: "Dashboard", icon:"fa-solid fa-table-columns", url:"https://cattymod.github.io/hub"},
     {name: "Home", icon:"fas fa-home", url:"https://cattymod.github.io"},
     {name: "Login", icon:"fas fa-door-open", url:"https://cattymod.github.io/login/"},
-    {name: "Editor", icon:"fas fa-edit", url:"https://cattymod.github.io/editor", external:true},
+    {name: "Editor", icon:"fas fa-edit", url:"https://cattymod.github.io/editor"},
     {name: "CattyMod Jr", icon:"fas fa-clone", url:"https://cattymod.github.io/jr"},
     {name: "CattyLinux", icon:"fas fa-cat", url:"https://cattymod.github.io/linux/"},
     {name: "CattyAdmin", icon:"fas fa-gamepad", url:"https://cattymod.github.io/admin/"},
     {name: "Packager", icon:"fas fa-box-open", url:"https://cattymod.github.io/packager/"},
-    {name: "ImproveMyScratch", icon:"fas fa-thumbs-up", url:"https://cattymod.github.io/ImproveMyScratch", external:true},
+    {name: "ImproveMyScratch", icon:"fas fa-thumbs-up", url:"https://cattymod.github.io/ImproveMyScratch"},
     {name: "CattyPassword Manager", icon:"fas fa-key", url:"https://cattymod.github.io/pass"},
     {name: "Linux Maker", icon:"fas fa-marker", url:"https://cattymod.github.io/linux/maker/"},
     {name: "Scrooch", icon:"fas fa-rocket", url:"https://scrooch-project.github.io", sponsored:true}
@@ -135,8 +171,8 @@
     card.className='dev-card';
     card.innerHTML=`<i class="${r.icon}"></i><span>${r.name}</span>`;
     card.addEventListener('click', ()=>{
-      let url = r.repo === "scrooch-project/scrooch-project.github.io" 
-        ? "https://github.com/scrooch-project/scrooch-project.github.io" 
+      let url = r.repo.startsWith("scrooch-project/") 
+        ? `https://github.com/${r.repo}` 
         : `https://github.com/cattymod/${r.repo}`;
       window.open(url,"_blank");
     });
@@ -146,11 +182,7 @@
   // Auto-Login toggle with persistence
   const autoLoginToggle = document.getElementById('autoLoginToggle');
   const savedState = localStorage.getItem('autoLoginEnabled');
-  if(savedState === 'true'){
-    autoLoginToggle.checked = true;
-    document.cookie = "CattyAuth=dev; path=/;";
-  }
-
+  if(savedState === 'true'){ autoLoginToggle.checked = true; document.cookie = "CattyAuth=dev; path=/;"; }
   autoLoginToggle.addEventListener('change', () => {
     if(autoLoginToggle.checked){
       document.cookie = "CattyAuth=dev; path=/;";
@@ -162,6 +194,35 @@
       alert("Auto-Login disabled (cookie cleared)");
     }
   });
+
+  // Cookie Manager
+  function refreshCookies(){
+    const list=document.getElementById('cookieList');
+    list.innerHTML="";
+    document.cookie.split(";").forEach(c=>{
+      const [name,...val]=c.trim().split("=");
+      const value=val.join("=");
+      if(name){
+        const div=document.createElement("div");
+        div.className="cookie-item";
+        div.innerHTML=`<span><b>${name}</b>: ${value}</span>
+          <span class="cookie-actions">
+            <button onclick="deleteCookie('${name}')">Delete</button>
+          </span>`;
+        list.appendChild(div);
+      }
+    });
+  }
+  function setCookie(){
+    const name=document.getElementById('cookieName').value;
+    const value=document.getElementById('cookieValue').value;
+    if(name){ document.cookie=`${name}=${value}; path=/;`; refreshCookies(); }
+  }
+  function deleteCookie(name){
+    document.cookie=`${name}=; expires=Thu,01 Jan 1970 00:00:00 UTC; path=/;`; refreshCookies();
+  }
+
+  refreshCookies();
 
   // Sidebar navigation
   function switchSection(element){
