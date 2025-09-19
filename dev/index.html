@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CattyMod DevMode</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: #f9fafb; color: #1f2937; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+
+    header {
+      width: 100%;
+      padding: 20px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    header .blue { color: #0ea5e9; }
+
+    .dev-content {
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      width: 90%;
+      max-width: 1000px;
+    }
+
+    .dev-card {
+      width: 130px;
+      height: 130px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .dev-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+    .dev-card i { font-size: 2.5rem; color: #0ea5e9; }
+    .dev-card span { font-weight: 600; font-size: 0.9rem; text-align: center; }
+
+    .sponsored-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #50c878;
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .toggle-container {
+      width: 100%;
+      max-width: 400px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    .toggle-container label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="blue">CattyMod</span> DevMode
+</header>
+
+<div class="toggle-container">
+  <label>
+    Enable Auto-Login
+    <input type="checkbox" id="autoLoginToggle">
+  </label>
+</div>
+
+<div class="dev-content" id="devAppsContainer">
+  <!-- App cards will be injected here -->
+</div>
+
+<script>
+  const apps = [
+    {name: "Dashboard", icon:"fas fa-house", url:"https://cattymod.github.io/hub"},
+    {name: "Home", icon:"fas fa-home", url:"https://cattymod.github.io"},
+    {name: "Login", icon:"fas fa-door-open", url:"https://cattymod.github.io/login/"},
+    {name: "Editor", icon:"fas fa-edit", url:"https://cattymod.github.io/editor", external:true},
+    {name: "CattyMod Jr", icon:"fas fa-clone", url:"https://cattymod.github.io/jr"},
+    {name: "CattyLinux", icon:"fas fa-cat", url:"https://cattymod.github.io/linux/"},
+    {name: "CattyAdmin", icon:"fas fa-gamepad", url:"https://cattymod.github.io/admin/"},
+    {name: "Packager", icon:"fas fa-box-open", url:"https://cattymod.github.io/packager/"},
+    {name: "ImproveMyScratch", icon:"fas fa-thumbs-up", url:"https://cattymod.github.io/ImproveMyScratch", external:true},
+    {name: "CattyPassword Manager", icon:"fas fa-key", url:"https://cattymod.github.io/pass"},
+    {name: "Linux Maker", icon:"fas fa-marker", url:"https://cattymod.github.io/linux/maker/"},
+    {name: "Scrooch", icon:"fas fa-rocket", url:"https://scrooch-project.github.io", sponsored:true}
+  ];
+
+  const container = document.getElementById('devAppsContainer');
+
+  apps.forEach(a => {
+    const card = document.createElement('div');
+    card.className = 'dev-card';
+    card.innerHTML = `
+      ${a.sponsored ? '<div class="sponsored-badge">SPONSORED</div>' : ''}
+      <i class="${a.icon}"></i>
+      <span>${a.name}</span>
+    `;
+    card.addEventListener('click', () => {
+      window.open(a.url, "_blank");
+    });
+    container.appendChild(card);
+  });
+
+  const autoLoginToggle = document.getElementById('autoLoginToggle');
+  autoLoginToggle.addEventListener('change', () => {
+    if(autoLoginToggle.checked){
+      document.cookie = "CattyAuth=dev; path=/;"; 
+      alert("Auto-Login enabled (cookie set)");
+    } else {
+      document.cookie = "CattyAuth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      alert("Auto-Login disabled (cookie cleared)");
+    }
+  });
+</script>
+
+</body>
+</html>
