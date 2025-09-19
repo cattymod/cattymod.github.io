@@ -143,14 +143,22 @@
     devReposContainer.appendChild(card);
   });
 
-  // Auto-Login toggle
-  const autoLoginToggle=document.getElementById('autoLoginToggle');
-  autoLoginToggle.addEventListener('change', ()=>{
+  // Auto-Login toggle with persistence
+  const autoLoginToggle = document.getElementById('autoLoginToggle');
+  const savedState = localStorage.getItem('autoLoginEnabled');
+  if(savedState === 'true'){
+    autoLoginToggle.checked = true;
+    document.cookie = "CattyAuth=dev; path=/;";
+  }
+
+  autoLoginToggle.addEventListener('change', () => {
     if(autoLoginToggle.checked){
-      document.cookie="CattyAuth=dev; path=/;";
+      document.cookie = "CattyAuth=dev; path=/;";
+      localStorage.setItem('autoLoginEnabled', 'true');
       alert("Auto-Login enabled (cookie set)");
     } else {
-      document.cookie="CattyAuth=; expires=Thu,01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "CattyAuth=; expires=Thu,01 Jan 1970 00:00:00 UTC; path=/;";
+      localStorage.setItem('autoLoginEnabled', 'false');
       alert("Auto-Login disabled (cookie cleared)");
     }
   });
