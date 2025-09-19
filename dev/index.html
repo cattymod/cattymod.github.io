@@ -1,109 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CattyMod DevMode</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background-color: #f9fafb; color: #1f2937; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CattyMod DevMode</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; font-family:'Inter',sans-serif; }
+  body { display:flex; min-height:100vh; background:#f9fafb; color:#1f2937; }
 
-    header {
-      width: 100%;
-      padding: 20px;
-      background-color: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 800;
-    }
-    header .blue { color: #0ea5e9; }
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
+    background:#fff;
+    border-right:1px solid #e5e7eb;
+    display:flex;
+    flex-direction:column;
+    padding:20px;
+  }
+  .sidebar h2 {
+    font-size:1.5rem; font-weight:700; margin-bottom:30px; text-align:left;
+  }
+  .sidebar h2 .blue { color:#0ea5e9; }
+  .sidebar a {
+    display:flex; align-items:center; gap:12px;
+    color:#374151; text-decoration:none; margin-bottom:20px;
+    font-weight:500; padding:8px 12px; border-radius:8px; cursor:pointer;
+    transition: color 0.2s, background 0.2s;
+  }
+  .sidebar a:hover { background:#e0f2fe; color:#0ea5e9; }
+  .sidebar a.active { background:#bae6fd; color:#0ea5e9; }
+  .sidebar a i { width:20px; text-align:center; }
 
-    .dev-content {
-      margin-top: 40px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      width: 90%;
-      max-width: 1000px;
-    }
+  /* Main content */
+  .main-content { flex-grow:1; display:flex; flex-direction:column; padding:30px; overflow-y:auto; }
+  .section-title { font-size:1.5rem; font-weight:700; margin-bottom:20px; }
+  .dev-content { display:flex; flex-wrap:wrap; gap:30px; }
+  .dev-card {
+    width:130px; height:130px; background:#fff; border-radius:20px;
+    padding:15px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,0.08); position:relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .dev-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
+  .dev-card i { font-size:2.5rem; color:#0ea5e9; }
+  .dev-card span { font-weight:600; font-size:0.9rem; text-align:center; }
+  .sponsored-badge { position:absolute; top:8px; right:8px; background:#50c878; color:white; font-size:0.65rem; font-weight:600; padding:2px 6px; border-radius:4px; }
 
-    .dev-card {
-      width: 130px;
-      height: 130px;
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-    }
-    .dev-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-    }
-    .dev-card i { font-size: 2.5rem; color: #0ea5e9; }
-    .dev-card span { font-weight: 600; font-size: 0.9rem; text-align: center; }
-
-    .sponsored-badge {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: #50c878;
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 600;
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-
-    .toggle-container {
-      width: 100%;
-      max-width: 400px;
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      margin-bottom: 30px;
-    }
-    .toggle-container label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      font-size: 1rem;
-    }
-  </style>
+  .toggle-container {
+    width:100%; max-width:400px; background:#fff; border-radius:20px; padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08); margin-bottom:30px;
+  }
+  .toggle-container label { display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:1rem; }
+</style>
 </head>
 <body>
 
-<header>
-  <span class="blue">CattyMod</span> DevMode
-</header>
-
-<div class="toggle-container">
-  <label>
-    Enable Auto-Login
-    <input type="checkbox" id="autoLoginToggle">
-  </label>
+<div class="sidebar">
+  <h2><span class="blue">Catty</span>Mod Dev</h2>
+  <a class="active" data-section="autologin" onclick="switchSection(this)"><i class="fas fa-toggle-on"></i>Auto-Login</a>
+  <a data-section="cdn" onclick="switchSection(this)"><i class="fas fa-box-open"></i>CDN Embeds</a>
+  <a data-section="github" onclick="switchSection(this)"><i class="fab fa-github"></i>GitHub Repos</a>
 </div>
 
-<div class="dev-content" id="devAppsContainer">
-  <!-- App cards will be injected here -->
+<div class="main-content">
+  <div id="autologin" class="section">
+    <div class="section-title">Auto-Login</div>
+    <div class="toggle-container">
+      <label>
+        Enable Auto-Login
+        <input type="checkbox" id="autoLoginToggle">
+      </label>
+    </div>
+  </div>
+
+  <div id="cdn" class="section" style="display:none;">
+    <div class="section-title">Apps / CDN Embeds</div>
+    <div class="dev-content" id="devAppsContainer"></div>
+  </div>
+
+  <div id="github" class="section" style="display:none;">
+    <div class="section-title">GitHub Repos</div>
+    <div class="dev-content" id="devReposContainer"></div>
+  </div>
 </div>
 
 <script>
   const apps = [
-    {name: "Dashboard", icon:"fas fa-house", url:"https://cattymod.github.io/hub"},
+    {name: "Dashboard", icon:"fa-solid fa-table-columns", url:"https://cattymod.github.io/hub"},
     {name: "Home", icon:"fas fa-home", url:"https://cattymod.github.io"},
     {name: "Login", icon:"fas fa-door-open", url:"https://cattymod.github.io/login/"},
     {name: "Editor", icon:"fas fa-edit", url:"https://cattymod.github.io/editor", external:true},
@@ -117,32 +104,65 @@
     {name: "Scrooch", icon:"fas fa-rocket", url:"https://scrooch-project.github.io", sponsored:true}
   ];
 
-  const container = document.getElementById('devAppsContainer');
+  const githubRepos = [
+    {name: "hub (Dashboard)", icon:"fas fa-table-columns", repo:"hub"},
+    {name: "cattymod.github.io", icon:"fas fa-globe", repo:"cattymod.github.io"},
+    {name: "editor", icon:"fas fa-edit", repo:"editor"},
+    {name: "jr", icon:"fas fa-clone", repo:"jr"},
+    {name: "linux", icon:"fas fa-cat", repo:"linux"},
+    {name: "admin", icon:"fas fa-gamepad", repo:"admin"},
+    {name: "packager", icon:"fas fa-box-open", repo:"packager"},
+    {name: "improvemyscratch", icon:"fas fa-thumbs-up", repo:"improvemyscratch"},
+    {name: "pass", icon:"fas fa-key", repo:"pass"},
+    {name: "linux/maker", icon:"fas fa-marker", repo:"linux/maker"},
+    {name: "Scrooch Project", icon:"fas fa-rocket", repo:"scrooch-project/scrooch-project.github.io"}
+  ];
 
+  // Inject app cards
+  const devAppsContainer = document.getElementById('devAppsContainer');
   apps.forEach(a => {
     const card = document.createElement('div');
-    card.className = 'dev-card';
-    card.innerHTML = `
-      ${a.sponsored ? '<div class="sponsored-badge">SPONSORED</div>' : ''}
-      <i class="${a.icon}"></i>
-      <span>${a.name}</span>
-    `;
-    card.addEventListener('click', () => {
-      window.open(a.url, "_blank");
-    });
-    container.appendChild(card);
+    card.className='dev-card';
+    card.innerHTML=`${a.sponsored?'<div class="sponsored-badge">SPONSORED</div>':''}<i class="${a.icon}"></i><span>${a.name}</span>`;
+    card.addEventListener('click', ()=>window.open(a.url,"_blank"));
+    devAppsContainer.appendChild(card);
   });
 
-  const autoLoginToggle = document.getElementById('autoLoginToggle');
-  autoLoginToggle.addEventListener('change', () => {
+  // Inject GitHub repo cards
+  const devReposContainer = document.getElementById('devReposContainer');
+  githubRepos.forEach(r => {
+    const card = document.createElement('div');
+    card.className='dev-card';
+    card.innerHTML=`<i class="${r.icon}"></i><span>${r.name}</span>`;
+    card.addEventListener('click', ()=>{
+      let url = r.repo === "scrooch-project/scrooch-project.github.io" 
+        ? "https://github.com/scrooch-project/scrooch-project.github.io" 
+        : `https://github.com/cattymod/${r.repo}`;
+      window.open(url,"_blank");
+    });
+    devReposContainer.appendChild(card);
+  });
+
+  // Auto-Login toggle
+  const autoLoginToggle=document.getElementById('autoLoginToggle');
+  autoLoginToggle.addEventListener('change', ()=>{
     if(autoLoginToggle.checked){
-      document.cookie = "CattyAuth=dev; path=/;"; 
+      document.cookie="CattyAuth=dev; path=/;";
       alert("Auto-Login enabled (cookie set)");
     } else {
-      document.cookie = "CattyAuth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie="CattyAuth=; expires=Thu,01 Jan 1970 00:00:00 UTC; path=/;";
       alert("Auto-Login disabled (cookie cleared)");
     }
   });
+
+  // Sidebar navigation
+  function switchSection(element){
+    document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
+    element.classList.add('active');
+    const section=element.dataset.section;
+    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+    document.getElementById(section).style.display='block';
+  }
 </script>
 
 </body>
