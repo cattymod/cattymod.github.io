@@ -118,13 +118,17 @@
 <body>
 
 <script>
-  // Only redirect if not in an iframe and not already on your site
-  if (window.top === window.self && 
-      !window.location.hostname.includes("cattymod.app")) {
-    // Always redirect to /move on the secondary site
-    window.location.href = "https://cattymod.github.io/move";
+  // Only run on top-level page (not iframe)
+  if (window.top === window.self) {
+    const ref = document.referrer;
+
+    // If the user came from cattymod.github.io, redirect them
+    if (ref && ref.includes("cattymod.github.io")) {
+      window.location.replace("https://cattymod.app/move");
+    }
   }
 </script>
+
 
 
 <!-- Navbar -->
