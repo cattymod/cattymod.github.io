@@ -117,12 +117,15 @@
 </head>
 <body>
 
-<!-- Redirect if not in iframe and URL doesn't contain cattymod.app -->
 <script>
-  if (window.top === window.self && !window.location.href.includes("cattymod.app")) {
-    window.location.href = "https://cattymod.app/move";
+  // Only redirect if not in an iframe and not already on your site
+  if (window.top === window.self && 
+      !window.location.hostname.includes("cattymod.app")) {
+    // Always redirect to /move on the main site
+    window.location.href = "https://www.cattymod.app/move";
   }
 </script>
+
 
 <!-- Navbar -->
 <nav>
