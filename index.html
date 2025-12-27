@@ -117,13 +117,19 @@
 </head>
 <body>
 
+<!-- Redirect if not in iframe and URL doesn't contain cattymod.app -->
+<script>
+  if (window.top === window.self && !window.location.href.includes("cattymod.app")) {
+    window.location.href = "https://cattymod.app/move";
+  }
+</script>
+
 <!-- Navbar -->
 <nav>
   <div class="container">
     <div class="font-bold text-2xl"><span class="blue">Catty</span>Mod</div>
     <div>
       <a href="#cattyservices">CattyServices</a>
-      <!-- <a href="#about">About</a> -->
       <a href="https://493group.mintlify.app" target="_blank">Docs</a>
       <a href="login" class="font-semibold text-orange-500 hover:text-orange-600 ml-4">Get Started</a>
     </div>
@@ -176,7 +182,6 @@
     <p>Drag-and-drop your own Chromium browsers in seconds ⚡</p>
   </div>
 </section>
-
 
 <!-- About -->
 <section id="about">
