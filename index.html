@@ -12,7 +12,6 @@
     color: #1f2937;
   }
 
-  /* Navbar */
   nav {
     background-color: #ffffff;
     border-bottom: 1px solid #e5e7eb;
@@ -35,7 +34,6 @@
   }
   nav a:hover { color: #0ea5e9; }
 
-  /* Hero */
   .hero {
     text-align: center;
     padding: 100px 20px 80px;
@@ -60,10 +58,11 @@
     border-radius: 0.75rem;
     font-weight: 600;
     transition: background 0.2s;
+    border: none;
+    cursor: pointer;
   }
   .hero .btn:hover { background-color: #ea580c; }
 
-  /* Cards */
   .cards {
     max-width: 1200px;
     margin: 0 auto;
@@ -86,7 +85,6 @@
   .card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
   .card p { color: #4b5563; }
 
-  /* About */
   #about {
     max-width: 800px;
     margin: 60px auto 80px;
@@ -104,7 +102,6 @@
     line-height: 1.75rem;
   }
 
-  /* Footer */
   footer {
     text-align: center;
     padding: 40px 20px;
@@ -118,24 +115,23 @@
 <body>
 
 <script>
-  // Helper to get a cookie by name
   function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
 
-  // Check if the cookie exists
+  // Intro redirect
   if (!getCookie("NewIntroDone")) {
-    // Set the cookie (expires in 90 days)
     document.cookie = "NewIntroDone=true; path=/; max-age=" + 90*24*60*60;
-    // Redirect
     window.location.href = "https://www.cattymod.app/move";
   }
+
+  // Open Editor button
+  function openEditor() {
+    window.location.href = "https://www.cattymod.app/editor/";
+  }
 </script>
-
-
-
 
 <!-- Navbar -->
 <nav>
@@ -149,59 +145,38 @@
   </div>
 </nav>
 
-<!-- Hero Section -->
+<!-- Hero -->
 <section class="hero">
   <h1>😺 <span class="blue">Catty</span>Mod</h1>
-  <p>A complete suite of tools—<span class="text-orange-500">CattyServices</span>—for creators, developers, and enthusiasts alike. Explore our apps, manage projects, and stay productive.</p>
-  <a href="login" class="btn">Get Started</a>
+  <p>A complete suite of tools—<span class="text-orange-500">CattyServices</span>—for creators, developers, and enthusiasts alike.</p>
+
+  <div class="flex justify-center gap-4">
+    <a href="login" class="btn">Get Started</a>
+    <button onclick="openEditor()" class="btn" style="background-color:#0ea5e9;">
+      Open Editor
+    </button>
+  </div>
 </section>
 
-<!-- CattyServices -->
+<!-- Cards -->
 <section id="cattyservices" class="cards">
-  <div class="card">
-    <h3>CattyMod Editor</h3>
-    <p>The best Scratch mod for power users 🛠️</p>
-  </div>
-  <div class="card">
-    <h3>CattyMod Jr</h3>
-    <p>Programming for beginners ✨</p>
-  </div>
-  <div class="card">
-    <h3>CattyLinux 🐧</h3>
-    <p>Lightweight Linux for creators</p>
-  </div>
-  <div class="card">
-    <h3>CattyAdmin</h3>
-    <p>Manage your projects efficiently 🗂️</p>
-  </div>
-  <div class="card">
-    <h3>Packager</h3>
-    <p>Share your projects with ease 📤</p>
-  </div>
-  <div class="card">
-    <h3>ImproveMyScratch</h3>
-    <p>Learn Scratch faster 🚀</p>
-  </div>
-  <div class="card">
-    <h3>Password Manager</h3>
-    <p>Keep your credentials safe 🛡️</p>
-  </div>
-  <div class="card">
-    <h3>Linux Maker 🏭</h3>
-    <p>Create custom Linux distributions 🖥️</p>
-  </div>
-  <div class="card">
-    <h3>Chromify 🌟</h3>
-    <p>Drag-and-drop your own Chromium browsers in seconds ⚡</p>
-  </div>
+  <div class="card"><h3>CattyMod Editor</h3><p>The best Scratch mod for power users 🛠️</p></div>
+  <div class="card"><h3>CattyMod Jr</h3><p>Programming for beginners ✨</p></div>
+  <div class="card"><h3>CattyLinux 🐧</h3><p>Lightweight Linux for creators</p></div>
+  <div class="card"><h3>CattyAdmin</h3><p>Manage your projects efficiently 🗂️</p></div>
+  <div class="card"><h3>Packager</h3><p>Share your projects with ease 📤</p></div>
+  <div class="card"><h3>ImproveMyScratch</h3><p>Learn Scratch faster 🚀</p></div>
+  <div class="card"><h3>Password Manager</h3><p>Keep your credentials safe 🛡️</p></div>
+  <div class="card"><h3>Linux Maker 🏭</h3><p>Create custom Linux distributions 🖥️</p></div>
+  <div class="card"><h3>Chromify 🌟</h3><p>Drag-and-drop your own Chromium browsers in seconds ⚡</p></div>
 </section>
 
 <!-- About -->
 <section id="about">
   <h2>About CattyMod</h2>
   <p>
-    CattyMod brings all your favorite tools into one platform, which we call <span class="text-orange-500">CattyServices</span>. 
-    Whether you're a creator, developer, or enthusiast, our suite includes editors, Linux utilities, Scratch enhancements, password management, and more—all designed to boost your productivity and creativity.
+    CattyMod brings all your favorite tools into one platform called <span class="text-orange-500">CattyServices</span>.
+    Build, create, and manage everything in one place.
   </p>
 </section>
 
