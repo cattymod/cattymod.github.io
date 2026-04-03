@@ -28,4 +28,13 @@
 <body>
     <iframe src="https://catty-mod-hub.lovable.app"></iframe>
 </body>
+<script>window.addEventListener("message", (event) => {
+  // Optionally check event.origin for security
+  if (event.origin !== "https://catty-mod-hub.lovable.app") return;
+
+  // Only act if the message is a redirect command
+  if (event.data?.action === "redirect" && event.data?.url) {
+    window.location.href = event.data.url;
+  }
+});</script>
 </html>
