@@ -26,49 +26,30 @@ iframe {
 <body>
 <iframe id="explore-frame" src="https://cattymod-explore.lovable.app"></iframe>
 
+<!-- inside cattymod-explore.lovable.app HTML or a script tag -->
 <script>
-  const iframe = document.getElementById("explore-frame");
-
-  if (!(iframe instanceof HTMLIFrameElement)) {
-    throw new Error("Iframe not found or invalid");
-  }
-
-  // Listen for messages from the iframe
   window.addEventListener("message", (event) => {
-    // Accept messages from the CattyMod Explore iframe
-    if (!event.origin.includes("cattymod-explore.lovable.app")) return;
+    // Security: only allow messages from your trusted parent
+    // For testing you can use "*"
+    // Replace "*" with your actual parent origin for production
+    if (event.origin !== "*" && !event.origin.includes("your-site.com")) return;
 
-    const message = event.data;
+    const msg = event.data;
 
-    if (message.action === "navigate") {
-      // Navigate iframe to new URL
-      iframe.src = message.url;
-    }
+    if (msg.action === "openProject" && msg.sb3_url) {
+      console.log("Received project to open:", msg.name, msg.sb3_url);
 
-    if (message.action === "alert") {
-      alert(message.text);
-    }
-
-    if (message.action === "openProject") {
-      // Example: open project SB3 inside the iframe's editor
-      console.log("Received project SB3:", message.sb3_url, message.name);
-
-      // Send message into iframe to trigger editor load
-      iframe.contentWindow?.postMessage(
-        {
-          action: "loadSB3",
-          sb3_url: message.sb3_url,
-          name: message.name
-        },
-        "https://cattymod-explore.lovable.app"
-      );
+      // Load project in your CattyMod viewer
+      // Example if you have an iframe with id "viewer-frame"
+      const viewer = document.getElementById("viewer-frame");
+      if (viewer) {
+        viewer.src = `https://studio.cattymod.app/?project_url=${encodeURIComponent(msg.sb3_url)}`;
+      } else {
+        // fallback: open in a new tab
+        window.open(`https://studio.cattymod.app/?project_url=${encodeURIComponent(msg.sb3_url)}`, "_blank");
+      }
     }
   });
-
-  // Function to send messages to the iframe
-  function sendMessageToIframe(data) {
-    iframe.contentWindow?.postMessage(data, "https://cattymod-explore.lovable.app");
-  }
 </script>
 </body>
 </html>
