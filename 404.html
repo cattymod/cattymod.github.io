@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | CattyMod</title>
+    <style>
+        /* Reset and basic styling */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        img {
+            max-width: 300px;
+            width: 80%;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: #ff6f61;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0 30px;
+            color: #555;
+        }
+
+        a.button {
+            background-color: #ff6f61;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        a.button:hover {
+            background-color: #ff4c3b;
+        }
+
+        /* Optional subtle animation */
+        img {
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 500px) {
+            h1 { font-size: 2.5rem; }
+            p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Image -->
+    <img src="https://cattymod.app/assets/dango/what.svg" alt="CattyMod 404">
+
+    <!-- Main Message -->
+    <h1>404</h1>
+    <p>Oops! The page you’re looking for doesn’t exist.</p>
+    
+    <!-- Home Button -->
+    <a href="https://cattymod.app" class="button">Go Back Home</a>
+</body>
+</html>
