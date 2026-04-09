@@ -25,7 +25,7 @@ It's based on **PenguinMod** and built with **Scrooch 3**, letting me easily cha
 
 ## ✨ Features
 
-- 🟢 **Play button** instead of the usual blue flag  
+- 🟢 **Play button** instead of the usual green/blue flag  
 - 🧠 **Custom tab titles:** `CattyMod - [Project Name]`  
 - 🧩 **Addon system** — enables powerful extras like tools and UI changes  
 - 🔧 Built with **Scrooch 3** for fast and easy modding  
