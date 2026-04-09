@@ -1,52 +1,74 @@
-# 😺 CattyMod
+# CattyMod
 
-Welcome to **CattyMod**, the ultimate suite of tools — what we like to call **CattyServices** — designed for creators, developers, and enthusiasts alike.  
+**CattyMod** is a cool, custom Scratch mod I made using the Scrooch 3 framework.  
+It’s a fully featured Scratch 3 editor that’s been reworked with visual tweaks and a massive list of add-ons that introduce powerful new tools and features.
 
-CattyMod is more than a single tool; it's a full collection of integrated utilities to enhance productivity, creativity, and security across your projects. Whether you're building software, managing Linux environments, or improving your Scratch workflow, CattyMod has something for you.
-
----
-
-## 🌟 CattyServices
-
-Here’s a quick overview of the tools included in CattyMod:
-
-- **😸 CattyMod Editor** – The best Scratch mod for power users 🛠️  
-- **👶 CattyMod Jr** – A programming language for young beginners ✨  
-- **🐧 CattyLinux** – The perfect Linux distribution 🖥️  
-- **🎛️ CattyAdmin** – Admin tools for managing your projects 🗂️  
-- **📦 CattyMod Packager** – Package mods easily for sharing 📤  
-- **👍 ImproveMyScratch** – Get better at Scratch 🚀  
-- **🔑 CattyPassword Manager** – Keep your passwords safe and secure 🛡️  
-- **🏭 Linux Maker** – Create your own Linux distributions 🖥️  
-
-Each service is designed to work seamlessly together, providing a cohesive suite experience for all types of users.
+<p align="center">
+  <a href="https://scrooch-project.github.io/ad/build/ad.html?mod=CattyMod">
+  <img src="https://scrooch-project.github.io/ad/PoweredByScrooch.svg" alt="Powered by Scrooch" width="150">
+</a>
+</p>
 
 ---
 
-## 🚀 Get Started
-
-To explore CattyServices and start using CattyMod:
-
-1. Visit the [CattyMod landing page](https://cattymod.github.io)  
-2. Click the **Get Started** button  
-3. Begin exploring the tools and services available in CattyMod  
+## 🔗 Live Demo  
+🎮 [cattymod.github.io/editor](https://cattymod.github.io/editor)
 
 ---
 
-## 🛠️ Why CattyMod?
+## 🐱 What is CattyMod?
 
-- **All-in-One Suite** – Access multiple tools in one place.  
-- **Cross-Platform** – Works on multiple devices and environments.  
-- **Secure** – Integrated password and data management tools.  
-- **Beginner-Friendly** – Tools for all levels, from beginners to advanced users.  
+CattyMod is a customizable Scratch 3 mod.  
+It's based on **PenguinMod** and built with **Scrooch 3**, letting me easily change how the editor looks and works — no compiling required.
 
 ---
 
-## 📜 License
+## ✨ Features
 
-CattyMod is open source and maintained by **The CattyMod Team**.  
-Visit our [GitHub repository](https://github.com/cattymod/cattymod.github.io) for source code and updates.
+- 🟢 **Play button** instead of the usual blue flag  
+- 🧠 **Custom tab titles:** `CattyMod - [Project Name]`  
+- 🧩 **Addon system** — enables powerful extras like tools and UI changes  
+- 🔧 Built with **Scrooch 3** for fast and easy modding  
+- 🌐 Works great on GitHub Pages or local installs
 
 ---
 
-© 2025 The CattyMod Team 💖
+## 🧩 Addons
+
+CattyMod supports **many addons** that can expand the editor with new features, blocks, or UI tools.
+
+### For example:
+
+- **Cat Blocks** 🐾 – Themed block pack designed for CattyMod  
+- **Pause Buttons** ⏸️ – Adds pause/resume control to projects  
+- **Developer Tools** 🛠️ – Tools to inspect and debug inside the editor  
+- **Enhanced Full Screen [Beta]** 🖥️ – A cleaner fullscreen experience with UI adjustments
+
+
+---
+
+## 🚀 Getting Started
+
+1. Go to [CattyMod on GitHub Pages](https://cattymod.github.io/editor)  
+2. Start creating a project or open an existing one  
+3. Try exploring the addons and enable what you want to change in the UI
+---
+
+## 🤔 Why Use CattyMod?
+
+- Visual and functional customization  
+- Addons that make your workflow easier and more fun  
+- Easy to remix and share  
+- Beginner-friendly but powerful for modders
+
+---
+
+## 🤝 Contributing
+
+I recommend you don't and instead contribute to the parent of CattyMod, [Scrooch](https://scrooch-project.github.io)
+
+---
+
+## 📄 License
+
+CattyMod is open source under the MIT License.
