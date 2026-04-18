@@ -4,20 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CattyMod Explore</title>
+<title>403 - CattyMod Explore</title>
 
 <style>
 html, body {
   margin: 0;
   min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ================= FULL PAGE ================= */
+/* SAME STYLE AS YOUR FULLPAGE */
 .fullpage {
   background: #f0f2f5;
   color: #333;
 
-  display: none;
+  display: flex;
   min-height: 100vh;
 
   flex-direction: column;
@@ -26,8 +27,6 @@ html, body {
 
   text-align: center;
   padding: 20px;
-
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .fullpage img {
@@ -62,62 +61,6 @@ html, body {
   background: #ff4c3b;
 }
 
-/* ================= EMBED MODE ================= */
-.embed {
-  background: transparent;
-
-  display: none;
-  justify-content: center;
-  align-items: center;
-
-  min-height: 100vh; /* FIX: ensures visibility */
-
-  width: 100%;
-
-  padding: 14px;
-  box-sizing: border-box;
-
-  font-family: Arial, sans-serif;
-  color: #fff;
-}
-
-.container {
-  display: flex;
-  align-items: center;
-
-  width: 100%;
-  max-width: 720px;
-
-  background: #232B2F;
-  padding: 22px;
-  border-radius: 14px;
-
-  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
-  box-sizing: border-box;
-}
-
-.icon {
-  width: 64px;
-  height: 64px;
-  margin-right: 18px;
-  flex-shrink: 0;
-}
-
-.text {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.text strong {
-  font-size: 16px;
-}
-
-.mode-tag {
-  margin-top: 8px;
-  font-size: 12px;
-  opacity: 0.6;
-}
-
 /* animation */
 @keyframes float {
   0%,100% { transform: translateY(0px); }
@@ -128,9 +71,9 @@ html, body {
 
 <body>
 
-<!-- FULL PAGE -->
-<div class="fullpage" id="fullpage">
-  <img src="https://cattymod.app/assets/dango/phone.svg">
+<div class="fullpage">
+
+  <img src="https://cattymod.app/assets/dango/phone.svg" alt="CattyMod character">
 
   <h1>403</h1>
 
@@ -139,49 +82,9 @@ html, body {
     This could be due to being on a school device or having an outdated browser.
   </p>
 
-  <a class="home-btn" href="#" onclick="goHome()">Home</a>
+  <a class="home-btn" href="https://cattymod.app">Home</a>
+
 </div>
-
-<!-- EMBED MODE -->
-<div class="embed" id="embed">
-  <div class="container">
-    <img class="icon" src="https://cattymod.app/assets/dango/phone.svg">
-
-    <div class="text">
-      <strong>Explore is blocked.</strong><br>
-      This could be due to being on a school device or having an outdated browser.
-      <div class="mode-tag">Explore • Embedded view</div>
-    </div>
-  </div>
-</div>
-
-<script>
-function goHome() {
-  try {
-    window.top.location.href = "https://cattymod.app";
-  } catch (e) {
-    window.location.href = "https://cattymod.app";
-  }
-}
-
-function render() {
-  const full = document.getElementById("fullpage");
-  const embed = document.getElementById("embed");
-
-  const isEmbed = window.innerHeight <= 300;
-
-  if (isEmbed) {
-    embed.style.display = "flex";
-    full.style.display = "none";
-  } else {
-    full.style.display = "flex";
-    embed.style.display = "none";
-  }
-}
-
-window.addEventListener("load", render);
-window.addEventListener("resize", render);
-</script>
 
 </body>
 </html>
