@@ -25,37 +25,45 @@
     <div id="root"></div>
   </body>
 
-  <script>
-    let receivedConnection = false;
+<script>
+  let receivedConnection = false;
 
-    const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
+  const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
 
-    function failTo403() {
-      const iframe = document.querySelector("iframe");
+  function failTo403() {
+    const iframe = document.querySelector("iframe");
 
-      if (!iframe) return;
-
+    if (iframe) {
       iframe.src = "https://cattymod.app/explore/403.html";
     }
+  }
 
-    // Listen for connection message
-    window.addEventListener("message", (event) => {
-      if (event.origin !== EXPLORER_ORIGIN) return;
+  // Listen for connection message
+  window.addEventListener("message", (event) => {
+    if (event.origin !== EXPLORER_ORIGIN) return;
 
-      if (event.data?.action === "status" && event.data?.message === "Connected") {
-        receivedConnection = true;
+    if (event.data?.action === "status" && event.data?.message === "Connected") {
+      receivedConnection = true;
+    }
+  });
+
+  // Wait for iframe to exist + then run watchdog
+  window.addEventListener("load", () => {
+    const waitForIframe = setInterval(() => {
+      const iframe = document.querySelector("iframe");
+
+      if (iframe) {
+        clearInterval(waitForIframe);
+
+        setTimeout(() => {
+          if (!receivedConnection) {
+            failTo403();
+          }
+        }, 1200);
       }
-    });
-
-    // Watchdog: 1.2s after load
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        if (!receivedConnection) {
-          failTo403();
-        }
-      }, 10);
-    });
-  </script>
+    }, 50);
+  });
+</script>
 
   <script>
     window.addEventListener("message", (event) => {
