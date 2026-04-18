@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CattyMod Explore</title>
+
+<style>
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+/* ================= FULL PAGE (403) ================= */
+.fullpage {
+  background: #f0f2f5;
+  color: #333;
+
+  display: none;
+  min-height: 100vh;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  padding: 20px;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.fullpage img {
+  width: 70%;
+  max-width: 260px;
+  margin-bottom: 20px;
+  animation: float 2s ease-in-out infinite;
+}
+
+.fullpage h1 {
+  font-size: 3rem;
+  margin: 0;
+  color: #ff6f61;
+}
+
+.fullpage p {
+  font-size: 1.2rem;
+  margin: 10px 0 25px;
+  color: #555;
+}
+
+.home-btn {
+  background: #ff6f61;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.home-btn:hover {
+  background: #ff4c3b;
+}
+
+/* ================= EMBED MODE (PERFECT CENTER) ================= */
+.embed {
+  background: #212121;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  height: 300px;
+  padding: 14px;
+  box-sizing: border-box;
+
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+/* FIXED CENTER BOX (NO HEIGHT TRICKS) */
+.container {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  max-width: 720px;
+
+  background: #2a2a2a;
+  padding: 22px;
+  border-radius: 14px;
+
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+  box-sizing: border-box;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  margin-right: 18px;
+  flex-shrink: 0;
+}
+
+.text {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.text strong {
+  font-size: 16px;
+}
+
+.mode-tag {
+  margin-top: 8px;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* animation */
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FULL PAGE -->
+<div class="fullpage" id="fullpage">
+  <img src="https://cattymod.app/assets/dango/phone.svg">
+
+  <h1>403</h1>
+
+  <p>
+    We couldn't load the explore page.<br>
+    This could be due to being on a school device or having an outdated browser.
+  </p>
+
+  <a class="home-btn" href="https://cattymod.app" target="_blank">
+    Home
+  </a>
+</div>
+
+<!-- EMBED MODE -->
+<div class="embed" id="embed">
+  <div class="container">
+    <img class="icon" src="https://cattymod.app/assets/dango/phone.svg">
+
+    <div class="text">
+      <strong>Explore is blocked.</strong><br>
+      School device or outdated browser.
+      <div class="mode-tag">Explore • Embedded view</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function render() {
+  const full = document.getElementById("fullpage");
+  const embed = document.getElementById("embed");
+
+  const isEmbed = window.innerHeight <= 300;
+
+  if (isEmbed) {
+    embed.style.display = "flex";
+    full.style.display = "none";
+  } else {
+    full.style.display = "flex";
+    embed.style.display = "none";
+  }
+}
+
+window.addEventListener("load", () => {
+  requestAnimationFrame(render);
+});
+
+window.addEventListener("resize", render);
+</script>
+
+</body>
+</html>
