@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>CattyMod - Explore</title>
 
 <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAgCAYAAADqgqNBAA...">
@@ -13,7 +12,6 @@ html, body {
   height: 100%;
   margin: 0;
   overflow: hidden;
-
   background-image: url("https://trampoline.turbowarp.org/avatars/20269294");
   background-size: cover;
   background-position: center;
@@ -34,27 +32,25 @@ iframe {
 
 <script>
 const iframe = document.getElementById("explore-frame");
-
 const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
 
 let receivedConnection = false;
+let failed = false;
 
 // Listen for "Connected"
 window.addEventListener("message", (event) => {
   if (event.origin !== EXPLORER_ORIGIN) return;
 
-  if (
-    event.data?.action === "status" &&
-    event.data?.message === "Connected"
-  ) {
+  if (event.data?.action === "status" && event.data?.message === "Connected") {
     receivedConnection = true;
   }
 });
 
-// Watchdog: 1.2s after load
+// Watchdog
 window.addEventListener("load", () => {
   setTimeout(() => {
-    if (!receivedConnection) {
+    if (!receivedConnection && !failed) {
+      failed = true;
       iframe.src = "https://cattymod.app/explore/403.html";
     }
   }, 80);
