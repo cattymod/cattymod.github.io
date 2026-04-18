@@ -65,7 +65,7 @@ window.addEventListener("load", () => {
     setTimeout(() => {
       if (!receivedConnection && !failed) {
         failed = true;
-        iframe.src = "https://cattymod.app/explore/403.html";
+        window.location.href = "https://cattymod.app/explore/403.html";
       }
     }, delay);
   }, 50);
