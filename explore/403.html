@@ -12,7 +12,7 @@ html, body {
   height: 100%;
 }
 
-/* ================= FULL PAGE (403) ================= */
+/* FULL PAGE */
 .fullpage {
   background: #f0f2f5;
   color: #333;
@@ -62,15 +62,17 @@ html, body {
   background: #ff4c3b;
 }
 
-/* ================= EMBED MODE (PERFECT CENTER) ================= */
+/* EMBED MODE */
 .embed {
-  background: #182125; /* updated */
-  display: flex;
+  background: transparent;
 
+  display: none;
   justify-content: center;
   align-items: center;
 
-  height: 300px;
+  width: 100%;
+  height: 100%;
+
   padding: 14px;
   box-sizing: border-box;
 
@@ -78,7 +80,6 @@ html, body {
   color: #fff;
 }
 
-/* FIXED CENTER BOX (NO HEIGHT TRICKS) */
 .container {
   display: flex;
   align-items: center;
@@ -86,7 +87,7 @@ html, body {
   width: 100%;
   max-width: 720px;
 
-  background: #232B2F; /* updated */
+  background: #232B2F;
   padding: 22px;
   border-radius: 14px;
 
@@ -116,7 +117,6 @@ html, body {
   opacity: 0.6;
 }
 
-/* animation */
 @keyframes float {
   0%,100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -137,9 +137,8 @@ html, body {
     This could be due to being on a school device or having an outdated browser.
   </p>
 
-<a class="home-btn" href="#" onclick="window.top.location.href='https://cattymod.app'; return false;">
-  Home
-</a>
+  <a class="home-btn" href="#" onclick="goHome()">Home</a>
+</div>
 
 <!-- EMBED MODE -->
 <div class="embed" id="embed">
@@ -155,6 +154,14 @@ html, body {
 </div>
 
 <script>
+function goHome() {
+  try {
+    window.top.location.href = "https://cattymod.app";
+  } catch (e) {
+    window.location.href = "https://cattymod.app";
+  }
+}
+
 function render() {
   const full = document.getElementById("fullpage");
   const embed = document.getElementById("embed");
@@ -170,10 +177,7 @@ function render() {
   }
 }
 
-window.addEventListener("load", () => {
-  requestAnimationFrame(render);
-});
-
+window.addEventListener("load", render);
 window.addEventListener("resize", render);
 </script>
 
