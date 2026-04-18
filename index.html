@@ -3,35 +3,68 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
     <title>CattyMod — Home</title>
+
     <meta name="description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
     <meta name="author" content="CattyMod" />
 
-    
-    
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
 
     <meta name="twitter:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
     <meta property="og:title" content="CattyMod — Block-based coding that works">
-  <meta name="twitter:title" content="CattyMod — Block-based coding that works">
-  <meta property="og:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
-  <meta name="twitter:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
-  <script type="module" crossorigin src="/assets/index-vJNnzzXk.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-ZHZclPUs.css">
-</head>
+    <meta name="twitter:title" content="CattyMod — Block-based coding that works">
+    <meta property="og:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
+    <meta name="twitter:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
+
+    <script type="module" crossorigin src="/assets/index-vJNnzzXk.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-ZHZclPUs.css">
+  </head>
 
   <body>
     <div id="root"></div>
   </body>
-  <script>window.addEventListener("message", (event) => {
-  // Optionally check event.origin for security
-  if (event.origin !== "https://cattymod.app") return;
 
-  // Only act if the message is a redirect command
-  if (event.data?.action === "redirect" && event.data?.url) {
-    window.location.href = event.data.url;
-  }
-});</script>
+  <script>
+    let receivedConnection = false;
+
+    const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
+
+    function failTo403() {
+      const iframe = document.querySelector("iframe");
+
+      if (!iframe) return;
+
+      iframe.src = "https://cattymod.app/explore/403.html";
+    }
+
+    // Listen for connection message
+    window.addEventListener("message", (event) => {
+      if (event.origin !== EXPLORER_ORIGIN) return;
+
+      if (event.data?.action === "status" && event.data?.message === "Connected") {
+        receivedConnection = true;
+      }
+    });
+
+    // Watchdog: 1.2s after load
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        if (!receivedConnection) {
+          failTo403();
+        }
+      }, 1200);
+    });
+  </script>
+
+  <script>
+    window.addEventListener("message", (event) => {
+      if (event.origin !== "https://cattymod.app") return;
+
+      if (event.data?.action === "redirect" && event.data?.url) {
+        window.location.href = event.data.url;
+      }
+    });
+  </script>
+
 </html>
