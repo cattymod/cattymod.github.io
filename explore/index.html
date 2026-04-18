@@ -37,7 +37,14 @@ const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
 let receivedConnection = false;
 let failed = false;
 
-// Listen for "Connected"
+function isMobile() {
+  return (
+    window.matchMedia("(max-width: 768px)").matches ||
+    /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
+  );
+}
+
+// Listen for connection
 window.addEventListener("message", (event) => {
   if (event.origin !== EXPLORER_ORIGIN) return;
 
@@ -46,14 +53,22 @@ window.addEventListener("message", (event) => {
   }
 });
 
-// Watchdog
+// Safe watchdog (wait for iframe + adaptive timing)
 window.addEventListener("load", () => {
-  setTimeout(() => {
-    if (!receivedConnection && !failed) {
-      failed = true;
-      iframe.src = "https://cattymod.app/explore/403.html";
-    }
-  }, 80);
+  const waitForIframe = setInterval(() => {
+    if (!iframe) return;
+
+    clearInterval(waitForIframe);
+
+    const delay = isMobile() ? 3000 : 1200;
+
+    setTimeout(() => {
+      if (!receivedConnection && !failed) {
+        failed = true;
+        iframe.src = "https://cattymod.app/explore/403.html";
+      }
+    }, delay);
+  }, 50);
 });
 </script>
 
