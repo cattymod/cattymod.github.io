@@ -32,30 +32,28 @@ iframe {
 
 <script>
 const iframe = document.getElementById("explore-frame");
-
 const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
 
 let receivedConnection = false;
+let failed = false;
 
-// 1) Listen for "Connected" message
+// Listen for "Connected"
 window.addEventListener("message", (event) => {
   if (event.origin !== EXPLORER_ORIGIN) return;
 
-  if (
-    event.data?.action === "status" &&
-    event.data?.message === "Connected"
-  ) {
+  if (event.data?.action === "status" && event.data?.message === "Connected") {
     receivedConnection = true;
   }
 });
 
-// 2) Watchdog (1.2s after load)
+// Watchdog
 window.addEventListener("load", () => {
   setTimeout(() => {
-    if (!receivedConnection) {
+    if (!receivedConnection && !failed) {
+      failed = true;
       iframe.src = "https://cattymod.app/explore/403.html";
     }
-  }, 10);
+  }, 80);
 });
 </script>
 
