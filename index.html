@@ -1,78 +1,88 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CattyMod — Home</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CattyMod — Home</title>
 
-    <meta name="description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
-    <meta name="author" content="CattyMod" />
+  <meta name="description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
+  <meta name="author" content="CattyMod" />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
 
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
-    <meta property="og:title" content="CattyMod — Block-based coding that works">
-    <meta name="twitter:title" content="CattyMod — Block-based coding that works">
-    <meta property="og:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
-    <meta name="twitter:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
+  <meta property="og:title" content="CattyMod — Block-based coding that works">
+  <meta name="twitter:title" content="CattyMod — Block-based coding that works">
+  <meta property="og:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
+  <meta name="twitter:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
 
-    <script type="module" crossorigin src="/assets/index-vJNnzzXk.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-ZHZclPUs.css">
-  </head>
+  <script type="module" crossorigin src="/assets/index-vJNnzzXk.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-ZHZclPUs.css">
+</head>
 
-  <body>
-    <div id="root"></div>
-  </body>
+<body>
+  <div id="root"></div>
 
 <script>
-  let receivedConnection = false;
+let receivedConnection = false;
+let failed = false;
 
-  const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
+const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
 
-  function failTo403() {
+function isMobile() {
+  return (
+    window.matchMedia("(max-width: 768px)").matches ||
+    /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
+  );
+}
+
+function failTo403() {
+  const iframe = document.querySelector("iframe");
+  if (!iframe || failed) return;
+
+  failed = true;
+  iframe.src = "https://cattymod.app/explore/403-embed.html";
+}
+
+// Listen for connection message
+window.addEventListener("message", (event) => {
+  if (event.origin !== EXPLORER_ORIGIN) return;
+
+  if (event.data?.action === "status" && event.data?.message === "Connected") {
+    receivedConnection = true;
+  }
+});
+
+// Watchdog
+window.addEventListener("load", () => {
+  const waitForIframe = setInterval(() => {
     const iframe = document.querySelector("iframe");
 
-    if (iframe) {
-      iframe.src = "https://cattymod.app/explore/403-embed.html";
-    }
-  }
+    if (!iframe) return;
 
-  // Listen for connection message
-  window.addEventListener("message", (event) => {
-    if (event.origin !== EXPLORER_ORIGIN) return;
+    clearInterval(waitForIframe);
 
-    if (event.data?.action === "status" && event.data?.message === "Connected") {
-      receivedConnection = true;
-    }
-  });
+    const delay = isMobile() ? 3000 : 1200;
 
-  // Wait for iframe to exist + then run watchdog
-  window.addEventListener("load", () => {
-    const waitForIframe = setInterval(() => {
-      const iframe = document.querySelector("iframe");
-
-      if (iframe) {
-        clearInterval(waitForIframe);
-
-        setTimeout(() => {
-          if (!receivedConnection) {
-            failTo403();
-          }
-        }, 80);
+    setTimeout(() => {
+      if (!receivedConnection) {
+        failTo403();
       }
-    }, 50);
-  });
+    }, delay);
+  }, 50);
+});
 </script>
 
-  <script>
-    window.addEventListener("message", (event) => {
-      if (event.origin !== "https://cattymod.app") return;
+<script>
+window.addEventListener("message", (event) => {
+  if (event.origin !== "https://cattymod.app") return;
 
-      if (event.data?.action === "redirect" && event.data?.url) {
-        window.location.href = event.data.url;
-      }
-    });
-  </script>
+  if (event.data?.action === "redirect" && event.data?.url) {
+    window.location.href = event.data.url;
+  }
+});
+</script>
 
+</body>
 </html>
