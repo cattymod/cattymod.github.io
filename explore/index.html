@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CattyMod - Explore</title>
+
 <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAgCAYAAADqgqNBAA...">
+
 <style>
 html, body {
   height: 100%;
@@ -23,7 +25,39 @@ iframe {
 }
 </style>
 </head>
+
 <body>
+
 <iframe id="explore-frame" src="https://cattymod-explore.lovable.app"></iframe>
+
+<script>
+const iframe = document.getElementById("explore-frame");
+
+const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
+
+let receivedConnection = false;
+
+// 1) Listen for "Connected" message
+window.addEventListener("message", (event) => {
+  if (event.origin !== EXPLORER_ORIGIN) return;
+
+  if (
+    event.data?.action === "status" &&
+    event.data?.message === "Connected"
+  ) {
+    receivedConnection = true;
+  }
+});
+
+// 2) Watchdog (1.2s after load)
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    if (!receivedConnection) {
+      iframe.src = "https://cattymod.app/explore/403.html";
+    }
+  }, 1200);
+});
+</script>
+
 </body>
 </html>
