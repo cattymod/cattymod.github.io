@@ -1,39 +1,37 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CattyMod - Home</title>
+<script>
+(function () {
+    const TARGET_SRC = "https://cattymod-explore.lovable.app/embed";
 
-  <meta name="description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
-  <meta name="author" content="CattyMod" />
+    function removeIframe() {
+        document.querySelectorAll("iframe").forEach((iframe) => {
+            if (
+                iframe.src &&
+                iframe.src.includes("cattymod-explore.lovable.app/embed")
+            ) {
+                iframe.remove();
+            }
 
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="CattyMod — Block-based coding that works">
-  <meta property="og:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
+            // extra safety: sometimes src is empty but attribute exists
+            if (
+                iframe.getAttribute("src") &&
+                iframe.getAttribute("src").includes("cattymod-explore.lovable.app/embed")
+            ) {
+                iframe.remove();
+            }
+        });
+    }
 
-  <meta name="twitter:title" content="CattyMod — Block-based coding that works">
-  <meta name="twitter:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
+    // Run constantly (this is what actually prevents re-injection)
+    setInterval(removeIframe, 50);
 
-  <script type="module" crossorigin src="/assets/index-vJNnzzXk.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-ZHZclPUs.css">
-</head>
-
-<body>
-  <div id="root"></div>
-
-  <!-- Redirect handler (keeps app navigation working) -->
-  <script>
-    window.addEventListener("message", (event) => {
-      if (event.origin !== "https://cattymod.app") return;
-
-      if (event.data?.action === "redirect" && event.data?.url) {
-        window.location.href = event.data.url;
-      }
+    // Also run on DOM changes (React / JS reinserts)
+    const observer = new MutationObserver(removeIframe);
+    observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true
     });
-  </script>
 
-</body>
-</html>
+    // Initial cleanup
+    window.addEventListener("load", removeIframe);
+})();
+</script>
