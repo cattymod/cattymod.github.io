@@ -24,57 +24,8 @@
 <body>
   <div id="root"></div>
 
+  <!-- Redirect handler (keeps app navigation working) -->
   <script>
-    let receivedConnection = false;
-    let failed = false;
-
-    const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
-
-    function isMobile() {
-      return (
-        window.matchMedia("(max-width: 768px)").matches ||
-        /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
-      );
-    }
-
-    function failTo403() {
-      const iframe = document.querySelector("iframe");
-      if (!iframe || failed) return;
-
-      failed = true;
-      iframe.src = "https://cattymod.app/explore/403-embed.html";
-    }
-
-    // Listen for connection message from explorer iframe
-    window.addEventListener("message", (event) => {
-      if (event.origin !== EXPLORER_ORIGIN) return;
-
-      if (event.data?.action === "status" && event.data?.message === "Connected") {
-        receivedConnection = true;
-      }
-    });
-
-    // Watchdog: if iframe doesn't connect, force 403
-    window.addEventListener("load", () => {
-      const waitForIframe = setInterval(() => {
-        const iframe = document.querySelector("iframe");
-        if (!iframe) return;
-
-        clearInterval(waitForIframe);
-
-        const delay = isMobile() ? 3000 : 1200;
-
-        setTimeout(() => {
-          if (!receivedConnection) {
-            failTo403();
-          }
-        }, delay);
-      }, 50);
-    });
-  </script>
-
-  <script>
-    // Handles navigation / redirects coming from embedded app
     window.addEventListener("message", (event) => {
       if (event.origin !== "https://cattymod.app") return;
 
