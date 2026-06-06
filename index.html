@@ -25,62 +25,9 @@
   <div id="root"></div>
 
 <script>
-let receivedConnection = false;
-let failed = false;
-
-const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
-
-function isMobile() {
-  return (
-    window.matchMedia("(max-width: 768px)").matches ||
-    /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
-  );
-}
-
-function failTo403() {
-  const iframe = document.querySelector("iframe");
-  if (!iframe || failed) return;
-
-  failed = true;
-  iframe.src = "https://cattymod.app/explore/403-embed.html";
-}
-
-// Listen for connection message
-window.addEventListener("message", (event) => {
-  if (event.origin !== EXPLORER_ORIGIN) return;
-
-  if (event.data?.action === "status" && event.data?.message === "Connected") {
-    receivedConnection = true;
-  }
-});
-
-// Watchdog
 window.addEventListener("load", () => {
-  const waitForIframe = setInterval(() => {
-    const iframe = document.querySelector("iframe");
-
-    if (!iframe) return;
-
-    clearInterval(waitForIframe);
-
-    const delay = isMobile() ? 3000 : 1200;
-
-    setTimeout(() => {
-      if (!receivedConnection) {
-        failTo403();
-      }
-    }, delay);
-  }, 50);
-});
-</script>
-
-<script>
-window.addEventListener("message", (event) => {
-  if (event.origin !== "https://cattymod.app") return;
-
-  if (event.data?.action === "redirect" && event.data?.url) {
-    window.location.href = event.data.url;
-  }
+  const iframe = document.querySelector('iframe[src*="cattymod-explore.lovable.app"]');
+  if (iframe) iframe.remove();
 });
 </script>
 
