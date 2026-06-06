@@ -9,13 +9,13 @@
   <meta name="author" content="CattyMod" />
 
   <meta property="og:type" content="website" />
+  <meta property="og:title" content="CattyMod — Block-based coding that works">
+  <meta property="og:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
   <meta property="og:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
 
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
-  <meta property="og:title" content="CattyMod — Block-based coding that works">
   <meta name="twitter:title" content="CattyMod — Block-based coding that works">
-  <meta property="og:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
   <meta name="twitter:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and powered by Scrooch 3.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/cattymod/desktop/refs/heads/main/Screenshot%202026-04-10%20095307.png">
 
   <script type="module" crossorigin src="/assets/index-vJNnzzXk.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-ZHZclPUs.css">
@@ -24,12 +24,65 @@
 <body>
   <div id="root"></div>
 
-<script>
-window.addEventListener("load", () => {
-  const iframe = document.querySelector('iframe[src*="cattymod-explore.lovable.app"]');
-  if (iframe) iframe.remove();
-});
-</script>
+  <script>
+    let receivedConnection = false;
+    let failed = false;
+
+    const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
+
+    function isMobile() {
+      return (
+        window.matchMedia("(max-width: 768px)").matches ||
+        /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
+      );
+    }
+
+    function failTo403() {
+      const iframe = document.querySelector("iframe");
+      if (!iframe || failed) return;
+
+      failed = true;
+      iframe.src = "https://cattymod.app/explore/403-embed.html";
+    }
+
+    // Listen for connection message from explorer iframe
+    window.addEventListener("message", (event) => {
+      if (event.origin !== EXPLORER_ORIGIN) return;
+
+      if (event.data?.action === "status" && event.data?.message === "Connected") {
+        receivedConnection = true;
+      }
+    });
+
+    // Watchdog: if iframe doesn't connect, force 403
+    window.addEventListener("load", () => {
+      const waitForIframe = setInterval(() => {
+        const iframe = document.querySelector("iframe");
+        if (!iframe) return;
+
+        clearInterval(waitForIframe);
+
+        const delay = isMobile() ? 3000 : 1200;
+
+        setTimeout(() => {
+          if (!receivedConnection) {
+            failTo403();
+          }
+        }, delay);
+      }, 50);
+    });
+  </script>
+
+  <script>
+    // Handles navigation / redirects coming from embedded app
+    window.addEventListener("message", (event) => {
+      if (event.origin !== "https://cattymod.app") return;
+
+      if (event.data?.action === "redirect" && event.data?.url) {
+        window.location.href = event.data.url;
+      }
+    });
+  </script>
 
 </body>
 </html>
