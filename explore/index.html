@@ -3,74 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CattyMod - Explore</title>
 
-<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAgCAYAAADqgqNBAA...">
+<title>403 - CattyMod Explore</title>
 
 <style>
 html, body {
-  height: 100%;
   margin: 0;
-  overflow: hidden;
-  background-image: url("https://trampoline.turbowarp.org/avatars/20269294");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+/* SAME STYLE AS YOUR FULLPAGE */
+.fullpage {
+  background: #f0f2f5;
+  color: #333;
+
+  display: flex;
+  min-height: 100vh;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  padding: 20px;
+}
+
+.fullpage img {
+  width: 70%;
+  max-width: 260px;
+  margin-bottom: 20px;
+  animation: float 2s ease-in-out infinite;
+}
+
+.fullpage h1 {
+  font-size: 3rem;
+  margin: 0;
+  color: #ff6f61;
+}
+
+.fullpage p {
+  font-size: 1.2rem;
+  margin: 10px 0 25px;
+  color: #555;
+}
+
+.home-btn {
+  background: #ff6f61;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.home-btn:hover {
+  background: #ff4c3b;
+}
+
+/* animation */
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 </style>
 </head>
 
 <body>
 
-<iframe id="explore-frame" src="https://cattymod-explore.lovable.app"></iframe>
+<div class="fullpage">
 
-<script>
-const iframe = document.getElementById("explore-frame");
-const EXPLORER_ORIGIN = "https://cattymod-explore.lovable.app";
+  <img src="https://cattymod.app/assets/dango/phone.svg" alt="CattyMod character">
 
-let receivedConnection = false;
-let failed = false;
+  <h1>403</h1>
 
-function isMobile() {
-  return (
-    window.matchMedia("(max-width: 768px)").matches ||
-    /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
-  );
-}
+  <p>
+    Explore Move<br>
+    CattyMod Explore has been moved. Click the button below to open the studio on Scratch, where you can publish your projects instead.
+  </p>
 
-// Listen for connection
-window.addEventListener("message", (event) => {
-  if (event.origin !== EXPLORER_ORIGIN) return;
-
-  if (event.data?.action === "status" && event.data?.message === "Connected") {
-    receivedConnection = true;
-  }
-});
-
-// Safe watchdog (wait for iframe + adaptive timing)
-window.addEventListener("load", () => {
-  const waitForIframe = setInterval(() => {
-    if (!iframe) return;
-
-    clearInterval(waitForIframe);
-
-    const delay = isMobile() ? 3000 : 1200;
-
-    setTimeout(() => {
-      if (!receivedConnection && !failed) {
-        failed = true;
-        window.location.href = "https://cattymod.app/explore/403.html";
-      }
-    }, delay);
-  }, 50);
-});
-</script>
+<a class="home-btn" href="https://scratch.mit.edu/studios/51716082" target="_top">Visit Studio</a>
+<a class="home-btn" href="https://cattymod.app" target="_top">Home</a>
+  
+</div>
 
 </body>
 </html>
