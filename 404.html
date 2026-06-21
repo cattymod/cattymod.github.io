@@ -4,8 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Page Not Found | CattyMod</title>
+
+    <script>
+        (function () {
+            const host = window.location.host;
+            const path = window.location.pathname;
+            const hash = window.location.hash;
+
+            // Only run on cattymod.app (and subdomains)
+            if (!host.includes("cattymod.app")) return;
+
+            let match = null;
+
+            // /123
+            if (/^\/\d+$/.test(path)) {
+                match = path.replace("/", "");
+            }
+
+            // /projects/123
+            const projectMatch = path.match(/^\/projects\/(\d+)$/);
+            if (projectMatch) {
+                match = projectMatch[1];
+            }
+
+            // #123
+            if (!match && /^#\d+$/.test(hash)) {
+                match = hash.replace("#", "");
+            }
+
+            // redirect
+            if (match) {
+                window.location.replace("https://studio.cattymod.app/#" + match);
+            }
+        })();
+    </script>
+
     <style>
-        /* Reset and basic styling */
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,6 +58,7 @@
             max-width: 300px;
             width: 80%;
             margin-bottom: 30px;
+            animation: float 2s ease-in-out infinite;
         }
 
         h1 {
@@ -52,11 +87,6 @@
             background-color: #ff4c3b;
         }
 
-        /* Optional subtle animation */
-        img {
-            animation: float 2s ease-in-out infinite;
-        }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -69,14 +99,11 @@
     </style>
 </head>
 <body>
-    <!-- Top Image -->
     <img src="https://cattymod.app/assets/dango/what.svg" alt="CattyMod 404">
 
-    <!-- Main Message -->
     <h1>404</h1>
     <p>Oops! The page you’re looking for doesn’t exist.</p>
-    
-    <!-- Home Button -->
+
     <a href="https://cattymod.app" class="button">Go Back Home</a>
 </body>
 </html>
