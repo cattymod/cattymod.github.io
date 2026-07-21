@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found | CattyMod</title>
+  <title>404 Not Found</title>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script>
+  <script>
         (function () {
             const host = window.location.host;
             const path = window.location.pathname;
@@ -41,72 +42,93 @@
             }
         })();
     </script>
-
+    
     <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            padding: 20px;
-        }
+    :root {
+      --scratch-blue: #4D97FF;
+      --scratch-blue-dark: #3373CC;
+      --background: #ffffff;
+      --text: #575E75;
+    }
 
-        img {
-            max-width: 300px;
-            width: 80%;
-            margin-bottom: 30px;
-            animation: float 2s ease-in-out infinite;
-        }
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      border-top: 5px solid var(--scratch-blue-dark);
+    }
 
-        h1 {
-            font-size: 3rem;
-            margin: 0;
-            color: #ff6f61;
-        }
+    header {
+      background: var(--scratch-blue);
+      color: white;
+      text-align: center;
+      padding: 24px 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+    }
 
-        p {
-            font-size: 1.2rem;
-            margin: 10px 0 30px;
-            color: #555;
-        }
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
 
-        a.button {
-            background-color: #ff6f61;
-            color: white;
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+    }
 
-        a.button:hover {
-            background-color: #ff4c3b;
-        }
+    a {
+      color: var(--scratch-blue-dark);
+      text-decoration: none;
+      font-weight: 600;
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
+    a:hover {
+      text-decoration: underline;
+    }
 
-        @media (max-width: 500px) {
-            h1 { font-size: 2.5rem; }
-            p { font-size: 1rem; }
-        }
-    </style>
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #111827;
+        --text: #e5e7eb;
+      }
+
+      body {
+        background: var(--background);
+        color: var(--text);
+      }
+
+      header {
+        background: var(--scratch-blue-dark);
+      }
+
+      a {
+        color: #7db8ff;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <img src="https://cattymod.app/assets/dango/what.svg" alt="CattyMod 404">
+  <header>
+    <h1>404 Not Found</h1>
+  </header>
 
-    <h1>404</h1>
-    <p>Oops! The page you’re looking for doesn’t exist.</p>
+  <main>
+    <p>Sorry, it looks like that page doesn't exist.</p>
 
-    <a href="https://cattymod.app" class="button">Go Back Home</a>
+    <p>
+      Perhaps you should
+      <a href="/">go back to the homepage</a>?
+    </p>
+
+    <p>
+      If you believe you're seeing this message in error,
+      please
+      <a href="https://scratch.mit.edu/projects/1335032585/">let me know</a>.
+    </p>
+  </main>
 </body>
 </html>
