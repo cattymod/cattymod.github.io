@@ -1,3 +1,13 @@
-# CattyMod
+# 😺 CattyMod
 
-**CattyMod** is a scratch mod I made that is built for everyone! [Click here](https://studio.cattymod.app) to try it!
+Welcome to **CattyMod**, a scratch mod for everyone :)
+
+CattyMod is based on **Scratch** and  **TurboWarp** so you get the best experience!
+
+---
+
+🌐 Try the editor directly in your browser: [studio.cattymod.app](https://studio.cattymod.app/editor)
+
+---
+
+⚠️ **Note:** CattyMod is **not affiliated** with Scratch, the Scratch Team, or the Scratch Foundation.
