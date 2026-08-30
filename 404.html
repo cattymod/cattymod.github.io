@@ -7,43 +7,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <script>
-        (function () {
-            const host = window.location.host;
-            const path = window.location.pathname;
-            const hash = window.location.hash;
+    (function () {
+        const host = window.location.host;
+        const path = window.location.pathname;
+        const hash = window.location.hash;
 
-            // Only run on cattymod.app (and subdomains)
-            if (!host.includes("cattymod.app")) return;
+        // Only run on cattymod.app (and subdomains)
+        if (!host.includes("cattymod.app")) return;
 
-            // Don't redirect the dedicated 404 page
-            if (path === "/404") return;
+        // Don't redirect the dedicated 404 page
+        if (path === "/404") return;
 
-            let match = null;
+        let match = null;
+        let mode = "";
 
-            // /123 or /123/
-            if (/^\/\d+\/?$/.test(path)) {
-                match = path.replace(/\//g, "");
-            }
+        // /project/123 or /project/123/
+        const projectMatch = path.match(/^\/project\/(\d+)\/?$/);
+        if (projectMatch) {
+            match = projectMatch[1];
+        }
 
-            // /projects/123 or /projects/123/
-            const projectMatch = path.match(/^\/projects\/(\d+)\/?$/);
-            if (projectMatch) {
-                match = projectMatch[1];
-            }
+        // /project/123/editor or /project/123/editor/
+        const editorMatch = path.match(/^\/project\/(\d+)\/editor\/?$/);
+        if (editorMatch) {
+            match = editorMatch[1];
+            mode = "/editor";
+        }
 
-            // #123
-            if (!match && /^#\d+$/.test(hash)) {
-                match = hash.replace("#", "");
-            }
+        // /project/123/fullscreen or /project/123/fullscreen/
+        const fullscreenMatch = path.match(/^\/project\/(\d+)\/fullscreen\/?$/);
+        if (fullscreenMatch) {
+            match = fullscreenMatch[1];
+            mode = "/fullscreen";
+        }
 
-            // redirect
-            if (match) {
-                window.location.replace("https://studio.cattymod.app/#" + match);
-            }
-        })();
-    </script>
+        // #123
+        if (!match && /^#\d+$/.test(hash)) {
+            match = hash.replace("#", "");
+        }
+
+        // Redirect
+        if (match) {
+            window.location.replace(
+                "https://studio.cattymod.app" + mode + "#" + match
+            );
+        }
+    })();
+  </script>
     
-    <style>
+  <style>
     :root {
       --scratch-blue: #4D97FF;
       --scratch-blue-dark: #3373CC;
