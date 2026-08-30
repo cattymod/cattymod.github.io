@@ -21,21 +21,21 @@
         let match = null;
         let mode = "";
 
-        // /project/123 or /project/123/
-        const projectMatch = path.match(/^\/project\/(\d+)\/?$/);
+        // /projects/123
+        const projectMatch = path.match(/^\/projects\/(\d+)\/?$/);
         if (projectMatch) {
             match = projectMatch[1];
         }
 
-        // /project/123/editor or /project/123/editor/
-        const editorMatch = path.match(/^\/project\/(\d+)\/editor\/?$/);
+        // /projects/123/editor
+        const editorMatch = path.match(/^\/projects\/(\d+)\/editor\/?$/);
         if (editorMatch) {
             match = editorMatch[1];
             mode = "/editor";
         }
 
-        // /project/123/fullscreen or /project/123/fullscreen/
-        const fullscreenMatch = path.match(/^\/project\/(\d+)\/fullscreen\/?$/);
+        // /projects/123/fullscreen
+        const fullscreenMatch = path.match(/^\/projects\/(\d+)\/fullscreen\/?$/);
         if (fullscreenMatch) {
             match = fullscreenMatch[1];
             mode = "/fullscreen";
@@ -54,7 +54,7 @@
         }
     })();
   </script>
-    
+
   <style>
     :root {
       --scratch-blue: #4D97FF;
