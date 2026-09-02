@@ -2404,6 +2404,211 @@
           flex-direction: column;
         }
       }
+
+      .cm-features-section {
+        padding: 60px 20px;
+        background-color: #0d1117;
+        /* GitHub Dark style background */
+        color: #c9d1d9;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      .cm-container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .cm-section-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #f0f6fc;
+        margin-bottom: 40px;
+      }
+
+      .cm-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+      }
+
+      /* Card base style */
+      .cm-card {
+        position: relative;
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 12px;
+        padding: 28px 24px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .cm-card:hover {
+        transform: translateY(-6px);
+        border-color: #58a6ff;
+        box-shadow: 0 8px 30px rgba(88, 166, 255, 0.15);
+      }
+
+      .cm-card-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #58a6ff;
+        background: rgba(56, 139, 253, 0.1);
+        border-radius: 20px;
+        margin-bottom: 16px;
+      }
+
+      .cm-card-icon {
+        font-size: 2rem;
+        margin-bottom: 12px;
+      }
+
+      .cm-card h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.3rem;
+        color: #f0f6fc;
+      }
+
+      .cm-card p {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #8b949e;
+      }
+
+      .cm-card code {
+        background: #21262d;
+        color: #79c0ff;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.88rem;
+      }
+
+      /* Slide + Fade Animation Classes */
+      .cm-slide-fade {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .cm-slide-fade.cm-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+/* Try it out split button */
+.try-it-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  margin-top: 2rem;
+  border: 2px solid hsl(var(--hero-foreground));
+  border-radius: 9999px;
+  color: hsl(var(--hero-foreground));
+}
+
+.try-it-main {
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem 1.25rem .75rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: hsl(var(--hero-foreground));
+  transition: background-color .15s ease;
+  border-radius: 9999px 0 0 9999px;
+}
+
+.try-it-main:hover {
+  background-color: hsl(var(--hero-foreground) / .1);
+}
+
+.try-it-dropdown-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  padding: 0;
+  color: hsl(var(--hero-foreground));
+  border-left: 1px solid hsl(var(--hero-foreground) / .45);
+  border-radius: 0 9999px 9999px 0;
+  transition: background-color .15s ease;
+}
+
+.try-it-dropdown-button:hover {
+  background-color: hsl(var(--hero-foreground) / .1);
+}
+
+.try-it-dropdown-button svg {
+  transition: transform .2s ease;
+}
+
+.try-it-wrapper.open .try-it-dropdown-button svg {
+  transform: rotate(180deg);
+}
+
+.try-it-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  width: 300px;
+  padding: 6px;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition:
+    opacity .15s ease,
+    transform .15s ease,
+    visibility .15s ease;
+}
+
+.try-it-wrapper.open .try-it-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.try-it-option {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: hsl(var(--card-foreground));
+  transition: background-color .15s ease;
+}
+
+.try-it-option:hover {
+  background-color: hsl(var(--muted));
+}
+
+.try-it-option strong {
+  display: block;
+  font-size: .95rem;
+  font-weight: 600;
+}
+
+.try-it-option small {
+  display: block;
+  margin-top: 2px;
+  color: hsl(var(--muted-foreground));
+  font-size: .78rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 500px) {
+  .try-it-menu {
+    right: auto;
+    left: 0;
+    width: min(300px, calc(100vw - 48px));
+  }
+}
     </style>
   </head>
   <body>
@@ -2454,8 +2659,43 @@
             <div class="max-w-xl text-center md:text-left">
               <h1 class="text-4xl font-bold leading-tight text-hero-foreground md:text-6xl">Block-based coding with tons of capabilities</h1>
               <p class="mt-4 text-xl font-bold text-hero-foreground md:text-2xl">Built on top of <a href="https://scratch.mit.edu" target="_blank" rel="noopener noreferrer" class="underline decoration-2 underline-offset-4 hover:opacity-80">Scratch</a>. </p>
-              <a href="https://studio.cattymod.app" class="mt-8 inline-flex items-center gap-3 rounded-full border-2 border-hero-foreground px-7 py-3 text-lg font-semibold text-hero-foreground transition-colors hover:bg-hero-foreground/10">
-                <img src="https://cattymod.app/assets/tryit-DIDgsSnQ.png" alt="" class="h-7 w-7 rounded">Try it out </a>
+<!-- Try it out split button -->
+<div class="try-it-wrapper">
+  <a href="https://studio.cattymod.app" class="try-it-main">
+    <img src="https://cattymod.app/assets/tryit-DIDgsSnQ.png" alt="" class="h-7 w-7 rounded">
+    <span>Try it out</span>
+  </a>
+
+  <button
+    type="button"
+    class="try-it-dropdown-button"
+    aria-label="Choose CattyMod version"
+    aria-expanded="false"
+    onclick="toggleTryItDropdown(event)"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m6 9 6 6 6-6"></path>
+    </svg>
+  </button>
+
+  <div class="try-it-menu" id="tryItMenu">
+    <a href="https://beta.cattymod.app" class="try-it-option">
+      <span>
+        <strong>Beta</strong>
+        <small>Experimental Editor</small>
+      </span>
+    </a>
+
+    <a href="https://cattymod.app/previous" class="try-it-option">
+      <span>
+        <strong>Previous</strong>
+        <small>CattyMod built on Scrooch 3</small>
+      </span>
+    </a>
+  </div>
+</div>
             </div>
             <div class="w-full max-w-xl">
               <div class="rounded-xl overflow-hidden shadow-2xl">
@@ -2472,15 +2712,40 @@
         <!-- Links Bar -->
         <section class="flex flex-wrap items-center justify-center gap-4 bg-muted px-6 py-6">
           <a href="https://github.com/cattymod/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml-icon lucide-code-xml"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg> GitHub </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml-icon lucide-code-xml">
+              <path d="m18 16 4-4-4-4" />
+              <path d="m6 8-4 4 4 4" />
+              <path d="m14.5 4-5 16" />
+            </svg> GitHub </a>
           <a href="https://studio.cattymod.app/credits.html" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg> Credits </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <circle cx="9" cy="7" r="4" />
+            </svg> Credits </a>
           <a href="https://cattymod.app/extensions/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg> Extensions </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <circle cx="9" cy="7" r="4" />
+            </svg> Extensions </a>
           <a href="https://cattymod.app/desktop" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor-icon lucide-monitor"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>  Desktop </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor-icon lucide-monitor">
+              <rect width="20" height="14" x="2" y="3" rx="2" />
+              <line x1="8" x2="16" y1="21" y2="21" />
+              <line x1="12" x2="12" y1="17" y2="21" />
+            </svg> Desktop </a>
           <a href="https://cattymod.app/docs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-text-icon lucide-book-open-text"><path d="M12 5v16"/><path d="M16 13h2"/><path d="M16 9h2"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/><path d="M6 13h2"/><path d="M6 9h2"/></svg> Docs </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-text-icon lucide-book-open-text">
+              <path d="M12 5v16" />
+              <path d="M16 13h2" />
+              <path d="M16 9h2" />
+              <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" />
+              <path d="M6 13h2" />
+              <path d="M6 9h2" />
+            </svg> Docs </a>
         </section>
         <!-- News Grid -->
         <section class="bg-background px-6 py-10">
@@ -2526,124 +2791,6 @@
             </div>
           </div>
         </section>
-        <!-- CSS Styling -->
-        <style>
-          .cm-features-section {
-            padding: 60px 20px;
-            background-color: #0d1117;
-            /* GitHub Dark style background */
-            color: #c9d1d9;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-          }
-
-          .cm-container {
-            max-width: 1100px;
-            margin: 0 auto;
-          }
-
-          .cm-section-title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #f0f6fc;
-            margin-bottom: 40px;
-          }
-
-          .cm-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-          }
-
-          /* Card base style */
-          .cm-card {
-            position: relative;
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 28px 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-          }
-
-          .cm-card:hover {
-            transform: translateY(-6px);
-            border-color: #58a6ff;
-            box-shadow: 0 8px 30px rgba(88, 166, 255, 0.15);
-          }
-
-          .cm-card-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #58a6ff;
-            background: rgba(56, 139, 253, 0.1);
-            border-radius: 20px;
-            margin-bottom: 16px;
-          }
-
-          .cm-card-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-          }
-
-          .cm-card h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.3rem;
-            color: #f0f6fc;
-          }
-
-          .cm-card p {
-            margin: 0;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #8b949e;
-          }
-
-          .cm-card code {
-            background: #21262d;
-            color: #79c0ff;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.88rem;
-          }
-
-          /* Slide + Fade Animation Classes */
-          .cm-slide-fade {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-          }
-
-          .cm-slide-fade.cm-visible {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        </style>
-        <!-- Scroll Animation Script -->
-        <script>
-          document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.cm-slide-fade');
-            const observerOptions = {
-              root: null,
-              threshold: 0.15 // Trigger when 15% of the card is visible
-            };
-            const observer = new IntersectionObserver((entries, obs) => {
-              entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                  // Stagger card entrance animations slightly
-                  setTimeout(() => {
-                    entry.target.classList.add('cm-visible');
-                  }, index * 100);
-                  obs.unobserve(entry.target);
-                }
-              });
-            }, observerOptions);
-            cards.forEach(card => observer.observe(card));
-          });
-        </script>
         <!-- Footer Section -->
         <div class="flex flex-col items-center py-8">
           <img src="https://cattymod.app/assets/dango/blocks.svg" alt="Blocks illustration" class="max-w-full">
@@ -2655,18 +2802,56 @@
         </div>
       </div>
     </div>
-  <script>
-  const banner = document.getElementById('banner');
+    <script>
+      const banner = document.getElementById('banner');
+      // Hide the banner if the user dismissed it before
+      if (localStorage.getItem('cattymod-banner-dismissed') === 'true') {
+        banner.style.display = 'none';
+      }
 
-  // Hide the banner if the user dismissed it before
-  if (localStorage.getItem('cattymod-banner-dismissed') === 'true') {
-    banner.style.display = 'none';
+      function dismissBanner() {
+        banner.style.display = 'none';
+        localStorage.setItem('cattymod-banner-dismissed', 'true');
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.cm-slide-fade');
+        const observerOptions = {
+          root: null,
+          threshold: 0.15 // Trigger when 15% of the card is visible
+        };
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              // Stagger card entrance animations slightly
+              setTimeout(() => {
+                entry.target.classList.add('cm-visible');
+              }, index * 100);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+        cards.forEach(card => observer.observe(card));
+      });
+  function toggleTryItDropdown(event) {
+    event.stopPropagation();
+
+    const wrapper = document.querySelector('.try-it-wrapper');
+    const button = document.querySelector('.try-it-dropdown-button');
+    const isOpen = wrapper.classList.toggle('open');
+
+    button.setAttribute('aria-expanded', isOpen);
   }
 
-  function dismissBanner() {
-    banner.style.display = 'none';
-    localStorage.setItem('cattymod-banner-dismissed', 'true');
-  }
-</script>
- </body>
+  document.addEventListener('click', (event) => {
+    const wrapper = document.querySelector('.try-it-wrapper');
+
+    if (wrapper && !wrapper.contains(event.target)) {
+      wrapper.classList.remove('open');
+
+      const button = wrapper.querySelector('.try-it-dropdown-button');
+      button.setAttribute('aria-expanded', 'false');
+    }
+  });
+    </script>
+  </body>
 </html>
