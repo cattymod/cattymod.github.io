@@ -1,8 +1,8 @@
 # 😺 CattyMod
 
-Welcome to **CattyMod**, a scratch mod for everyone :)
+Welcome to **CattyMod**, a Scratch Mod for everyone :)
 
-CattyMod is based on **Scratch** and  **TurboWarp** so you get the best experience!
+CattyMod is based on **Scratch** and  **TurboWarp** so you get the best of both worlds + more!
 
 ---
 
