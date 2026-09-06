@@ -251,7 +251,7 @@
 
       // Verify the private code first.
       const verifyUrl =
-        "https://auth.itinerary.eu.org/auth/verifyToken/" +
+        "https://auth-api.itinerary.eu.org/auth/verifyToken/" +
         encodeURIComponent(privateCode);
 
       const response = await fetch(verifyUrl);
