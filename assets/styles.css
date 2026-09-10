@@ -2601,4 +2601,18 @@
   nav > div span {
     display: none;
   }
+
+  nav > a:not(:first-child),
+  nav > div a {
+    padding: 10px !important;
+    min-width: 42px;
+    min-height: 42px;
+    justify-content: center;
+  }
+
+  nav > a:not(:first-child) i,
+  nav > div a i {
+    width: 22px;
+    height: 22px;
+  }
 }
