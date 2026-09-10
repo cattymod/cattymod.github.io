@@ -2597,7 +2597,8 @@
 }
 
 @media (max-width: 459px) {
-  nav > a:not(:first-child) span {
+  nav > a:not(:first-child) span,
+  nav > div span {
     display: none;
   }
 }
