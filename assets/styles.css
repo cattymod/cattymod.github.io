@@ -2610,9 +2610,16 @@
     justify-content: center;
   }
 
-  nav > a:not(:first-child) i,
-  nav > div a i {
-    width: 22px;
-    height: 22px;
+ @media (max-width: 459px) {
+  /* Hide navbar button text */
+  nav > a:not(:first-child) span,
+  nav > div span {
+    display: none;
+  }
+
+  /* Make navbar icons bigger */
+  nav a i {
+    width: 24px !important;
+    height: 24px !important;
   }
 }
