@@ -2610,15 +2610,15 @@
     justify-content: center;
   }
 
- @media (max-width: 459px) {
+@media (max-width: 459px) {
   /* Hide navbar button text */
   nav > a:not(:first-child) span,
   nav > div span {
     display: none;
   }
 
-  /* Make navbar icons bigger */
-  nav a i {
+  /* Make Lucide icons bigger, but don't affect cattymod.svg */
+  nav a svg.lucide {
     width: 24px !important;
     height: 24px !important;
   }
