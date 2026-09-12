@@ -1,4 +1,3 @@
-```js
 (function() {
     // 1. Inject scoped CSS styles into the <head>
     const cssStyles = `
@@ -248,4 +247,3 @@
         window.lucide.createIcons();
     }
 })();
-```
