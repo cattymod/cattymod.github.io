@@ -187,7 +187,7 @@
     const navHTML = `
         <nav class="flex gap-4 px-4 py-2">
 
-            <a href="/" class="flex items-center gap-2">
+            <a href="https://cattymod.app" class="flex items-center gap-2">
                 <img
                     src="https://cattymod.app/assets/cattymod.svg"
                     alt="CattyMod icon"
