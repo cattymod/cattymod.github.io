@@ -42,7 +42,6 @@
             width: 100%;
         }
 
-        /* Utility classes matching your layout */
         .cattymod-navbar-wrapper a {
             color: inherit;
             text-decoration: inherit;
