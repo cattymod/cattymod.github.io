@@ -1,271 +1,304 @@
-(function () {
-    "use strict";
-
-    function createNavbar() {
-        // Prevent the navbar from being injected twice
-        if (document.querySelector(".cattymod-navbar-wrapper")) {
-            return;
+(function() {
+    // 1. Inject scoped CSS styles into the <head>
+    const cssStyles = `
+        /* CSS Reset variables scoped specifically for the navbar container */
+        .cattymod-navbar-wrapper,
+        .cattymod-navbar-wrapper *,
+        .cattymod-navbar-wrapper :before,
+        .cattymod-navbar-wrapper :after {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+            border-color: #e5e7eb;
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
         }
 
-        // Inject CSS
-        const styleEl = document.createElement("style");
-        styleEl.textContent = `
-            .cattymod-navbar-wrapper,
-            .cattymod-navbar-wrapper *,
-            .cattymod-navbar-wrapper *::before,
-            .cattymod-navbar-wrapper *::after {
-                box-sizing: border-box;
-            }
+        /* Navbar-specific styling and theme variables */
+        .cattymod-navbar-wrapper {
+            --background: 200 20% 12%;
+            --foreground: 0 0% 100%;
+            --card: 200 15% 16%;
+            --primary: 197 100% 40%;
+            --secondary: 270 38% 49%;
+            --muted: 200 15% 20%;
+            --accent: 192 100% 66%;
+            --border: 200 15% 22%;
+            --radius: .5rem;
 
-            .cattymod-navbar-wrapper {
-                --background: 200 20% 12%;
-                --foreground: 0 0% 100%;
-                --radius: .5rem;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            font-family: ui-sans-serif, system-ui, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol,
+                "Noto Color Emoji";
+            line-height: 1.5;
+            width: 100%;
+        }
 
-                width: 100%;
-                background-color: hsl(var(--background));
-                color: hsl(var(--foreground));
-                font-family: ui-sans-serif, system-ui, sans-serif,
-                    "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol,
-                    "Noto Color Emoji";
-                line-height: 1.5;
-            }
+        .cattymod-navbar-wrapper a {
+            color: inherit;
+            text-decoration: inherit;
+        }
 
-            .cattymod-navbar-wrapper a {
-                color: inherit;
-                text-decoration: none;
-            }
+        .cattymod-navbar-wrapper .flex {
+            display: flex;
+        }
 
-            .cattymod-navbar-wrapper nav {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                padding: .5rem 1rem;
-            }
+        .cattymod-navbar-wrapper .items-center {
+            align-items: center;
+        }
 
-            .cattymod-navbar-wrapper .cattymod-nav-link {
-                display: flex;
-                align-items: center;
-                gap: .5rem;
-                border-radius: calc(var(--radius) - 2px);
-                padding: .375rem .75rem;
-                color: #fff;
-                font-size: .875rem;
-                font-weight: 600;
-                transition:
-                    color 150ms cubic-bezier(.4, 0, .2, 1),
-                    background-color 150ms cubic-bezier(.4, 0, .2, 1);
-            }
+        .cattymod-navbar-wrapper .gap-2 {
+            gap: .5rem;
+        }
 
-            .cattymod-navbar-wrapper .cattymod-nav-link:hover {
-                background-color: rgb(255 255 255 / 0.1);
-            }
+        .cattymod-navbar-wrapper .gap-4 {
+            gap: 1rem;
+        }
 
-            .cattymod-navbar-wrapper .cattymod-logo {
-                width: 2.5rem;
-                height: 2.5rem;
-                border-radius: .25rem;
-            }
+        .cattymod-navbar-wrapper .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
 
-            .cattymod-navbar-wrapper .cattymod-icon {
-                width: 1rem;
-                height: 1rem;
-            }
+        .cattymod-navbar-wrapper .py-2 {
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+        }
 
-            .cattymod-navbar-wrapper .cattymod-right {
-                display: flex;
-                gap: 1rem;
-                margin-left: auto;
-            }
+        .cattymod-navbar-wrapper .h-10 {
+            height: 2.5rem;
+        }
 
-            .cattymod-external-notice {
-                width: 100%;
-                padding: 10px 16px;
-                box-sizing: border-box;
-                background: #fff3cd;
-                color: #664d03;
-                border-bottom: 1px solid #ffecb5;
-                font-family: ui-sans-serif, system-ui, sans-serif;
-                font-size: 14px;
-                line-height: 1.5;
-                text-align: center;
-            }
+        .cattymod-navbar-wrapper .w-10 {
+            width: 2.5rem;
+        }
 
-            .cattymod-external-notice a {
-                color: inherit;
-                font-weight: 700;
-                text-decoration: underline;
-            }
+        .cattymod-navbar-wrapper .h-4 {
+            height: 1rem;
+        }
 
-            @media (max-width: 459px) {
-                .cattymod-navbar-wrapper .cattymod-nav-link span {
-                    display: none;
-                }
+        .cattymod-navbar-wrapper .w-4 {
+            width: 1rem;
+        }
 
-                .cattymod-navbar-wrapper .cattymod-icon {
-                    width: 24px;
-                    height: 24px;
-                }
-            }
-        `;
+        .cattymod-navbar-wrapper .rounded {
+            border-radius: .25rem;
+        }
 
-        document.head.appendChild(styleEl);
+        .cattymod-navbar-wrapper .rounded-md {
+            border-radius: calc(var(--radius) - 2px);
+        }
 
-        // Current page URL
-        const currentUrlEncoded = encodeURIComponent(window.location.href);
+        .cattymod-navbar-wrapper .px-3 {
+            padding-left: .75rem;
+            padding-right: .75rem;
+        }
 
-        const settingsUrl =
-            "https://studio.cattymod.app/settings?from=" +
-            currentUrlEncoded;
+        .cattymod-navbar-wrapper .py-1\\.5 {
+            padding-top: .375rem;
+            padding-bottom: .375rem;
+        }
 
-        // Create navbar
-        const wrapperDiv = document.createElement("div");
-        wrapperDiv.className = "cattymod-navbar-wrapper";
+        .cattymod-navbar-wrapper .text-sm {
+            font-size: .875rem;
+            line-height: 1.25rem;
+        }
 
-        wrapperDiv.innerHTML = `
-            <nav>
+        .cattymod-navbar-wrapper .font-semibold {
+            font-weight: 600;
+        }
 
-                <a
-                    href="https://cattymod.app"
-                    class="cattymod-nav-link"
-                    aria-label="CattyMod home"
-                >
-                    <img
-                        src="https://cattymod.app/assets/cattymod.svg"
-                        alt="CattyMod"
-                        class="cattymod-logo"
-                    >
-                </a>
+        .cattymod-navbar-wrapper .text-white {
+            color: #fff;
+        }
 
-                <a
-                    href="https://studio.cattymod.app/editor"
-                    class="cattymod-nav-link"
-                >
-                    <i data-lucide="plus-circle" class="cattymod-icon"></i>
-                    <span>Create</span>
-                </a>
+        .cattymod-navbar-wrapper .transition-colors {
+            transition-property: color, background-color, border-color;
+            transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+            transition-duration: 150ms;
+        }
 
-                <a
-                    href="https://cattymod.app/explore/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="cattymod-nav-link"
-                >
-                    <i data-lucide="compass" class="cattymod-icon"></i>
-                    <span>Explore</span>
-                </a>
+        .cattymod-navbar-wrapper .hover\\:bg-white\\/10:hover {
+            background-color: rgb(255 255 255 / 0.1);
+        }
 
-                <div class="cattymod-right">
-
-                    <a
-                        href="https://cattymod.app/commits"
-                        class="cattymod-nav-link"
-                        onclick="window.open(
-                            this.href,
-                            'commitsWindow',
-                            'width=1000,height=700,resizable=yes,scrollbars=yes'
-                        ); return false;"
-                    >
-                        <i
-                            data-lucide="circle-fading-arrow-up"
-                            class="cattymod-icon"
-                        ></i>
-                        <span>Commits</span>
-                    </a>
-
-                    <a
-                        href="${settingsUrl}"
-                        class="cattymod-nav-link"
-                    >
-                        <i
-                            data-lucide="settings"
-                            class="cattymod-icon"
-                        ></i>
-                        <span>Settings</span>
-                    </a>
-
-                </div>
-
-            </nav>
-        `;
-
-        // Put navbar at the absolute beginning of <body>
-        document.body.insertBefore(
-            wrapperDiv,
-            document.body.firstChild
-        );
+        .cattymod-navbar-wrapper .ml-auto {
+            margin-left: auto;
+        }
 
         /*
-         * IMPORTANT:
+         * Mobile navbar mechanism
          *
-         * cattymod.app
-         * www.cattymod.app
-         * studio.cattymod.app
-         * anything.cattymod.app
-         *
-         * are all considered official CattyMod domains.
+         * At widths of 459px or less:
+         * - Hide the text labels for navbar buttons
+         * - Keep the CattyMod logo visible
+         * - Increase Lucide icons to 24x24
+         * - Do not affect cattymod.svg
          */
-        const hostname = window.location.hostname.toLowerCase();
+        @media (max-width: 459px) {
+            .cattymod-navbar-wrapper nav > a:not(:first-child) span,
+            .cattymod-navbar-wrapper nav > div span {
+                display: none;
+            }
 
-        const isCattyModDomain =
-            hostname === "cattymod.app" ||
-            hostname.endsWith(".cattymod.app");
-
-        // Show the warning on every non-CattyMod website
-        if (!isCattyModDomain) {
-            const noticeDiv = document.createElement("div");
-            noticeDiv.className = "cattymod-external-notice";
-
-            noticeDiv.innerHTML = `
-                This page is not officially by CattyMod.
-                <a
-                    href="https://cattymod.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >Go to cattymod.app</a>
-                to get a private and powerful Scratch mod.
-            `;
-
-            // Immediately below the navbar
-            wrapperDiv.insertAdjacentElement(
-                "afterend",
-                noticeDiv
-            );
+            .cattymod-navbar-wrapper nav a svg.lucide {
+                width: 24px !important;
+                height: 24px !important;
+            }
         }
 
-        // Load Lucide if necessary
-        function renderIcons() {
+        /* External-site warning */
+        .cattymod-external-notice {
+            width: 100%;
+            padding: 10px 16px;
+            box-sizing: border-box;
+            background: #fff3cd;
+            color: #664d03;
+            border-bottom: 1px solid #ffecb5;
+            font-family: ui-sans-serif, system-ui, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .cattymod-external-notice a {
+            color: inherit;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+    `;
+
+    const styleEl = document.createElement('style');
+    styleEl.innerHTML = cssStyles;
+    document.head.appendChild(styleEl);
+
+    // 2. Include the Lucide Icons Script if it doesn't already exist on the page
+    if (!document.querySelector('script[src*="lucide"]')) {
+        const lucideScript = document.createElement('script');
+
+        lucideScript.src = "https://unpkg.com/lucide@latest";
+        document.head.appendChild(lucideScript);
+
+        lucideScript.onload = function() {
             if (window.lucide) {
                 window.lucide.createIcons();
             }
-        }
-
-        if (window.lucide) {
-            renderIcons();
-        } else if (!document.querySelector('script[src*="lucide"]')) {
-            const lucideScript = document.createElement("script");
-
-            lucideScript.src =
-                "https://unpkg.com/lucide@latest";
-
-            lucideScript.onload = renderIcons;
-
-            document.head.appendChild(lucideScript);
-        }
+        };
     }
 
+    // 3. Dynamically generate the Settings URL with the current page's URL
+    const currentUrlEncoded = encodeURIComponent(window.location.href);
+    const settingsUrl =
+        `https://studio.cattymod.app/settings?from=${currentUrlEncoded}`;
+
+    // 4. Create the container wrapper and insert the HTML template
+    const wrapperDiv = document.createElement('div');
+    wrapperDiv.className = "cattymod-navbar-wrapper";
+
+    const navHTML = `
+        <nav class="flex gap-4 px-4 py-2">
+
+            <a href="https://cattymod.app" class="flex items-center gap-2">
+                <img
+                    src="https://cattymod.app/assets/cattymod.svg"
+                    alt="CattyMod icon"
+                    class="h-10 w-10 rounded"
+                >
+            </a>
+
+            <a
+                href="https://studio.cattymod.app/editor"
+                class="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            >
+                <i data-lucide="plus-circle" class="w-4 h-4 text-white"></i>
+                <span>Create</span>
+            </a>
+
+            <a
+                href="https://cattymod.app/explore/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            >
+                <i data-lucide="compass" class="w-4 h-4 text-white"></i>
+                <span>Explore</span>
+            </a>
+
+            <!-- Right-aligned options -->
+            <div class="ml-auto flex gap-4">
+
+                <a
+                    href="https://cattymod.app/commits"
+                    onclick="window.open(this.href, 'commitsWindow', 'width=1000,height=700,resizable=yes,scrollbars=yes'); return false;"
+                    class="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                >
+                    <i data-lucide="circle-fading-arrow-up" class="w-4 h-4 text-white"></i>
+                    <span>Commits</span>
+                </a>
+
+                <a
+                    href="${settingsUrl}"
+                    class="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                >
+                    <i data-lucide="settings" class="w-4 h-4 text-white"></i>
+                    <span>Settings</span>
+                </a>
+
+            </div>
+        </nav>
+    `;
+
+    wrapperDiv.innerHTML = navHTML;
+
+    // 5. Prepend the navbar to the top of the body
+    document.body.prepend(wrapperDiv);
+
     /*
-     * navbar.js is loaded with "defer", but this also makes the
-     * script safe if somebody loads it normally or from another
-     * environment.
+     * cattymod.app
+     * www.cattymod.app
+     * studio.cattymod.app
+     * anything.cattymod.app
+     *
+     * are all considered official CattyMod domains.
      */
-    if (document.readyState === "loading") {
-        document.addEventListener(
-            "DOMContentLoaded",
-            createNavbar,
-            { once: true }
+    const hostname = window.location.hostname.toLowerCase();
+
+    const isCattyModDomain =
+        hostname === "cattymod.app" ||
+        hostname.endsWith(".cattymod.app");
+
+    // Show the warning on every non-CattyMod website
+    if (!isCattyModDomain) {
+        const noticeDiv = document.createElement("div");
+        noticeDiv.className = "cattymod-external-notice";
+
+        noticeDiv.innerHTML = `
+            This page is not officially by CattyMod.
+            <a
+                href="https://cattymod.app"
+                target="_blank"
+                rel="noopener noreferrer"
+            >Go to cattymod.app</a>
+            to get a private and powerful Scratch mod.
+        `;
+
+        // Immediately below the navbar
+        wrapperDiv.insertAdjacentElement(
+            "afterend",
+            noticeDiv
         );
-    } else {
-        createNavbar();
+    }
+
+    // Render icons right away if Lucide is already available globally
+    if (window.lucide) {
+        window.lucide.createIcons();
     }
 })();
