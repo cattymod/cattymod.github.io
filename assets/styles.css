@@ -1,4 +1,4 @@
-      *,
+          *,
       :before,
       :after {
         --tw-border-spacing-x: 0;
@@ -2515,6 +2515,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 48px;
   width: 48px;
   padding: 0;
   color: hsl(var(--hero-foreground));
@@ -2535,21 +2536,36 @@
   transform: rotate(180deg);
 }
 
+/* Dropdown */
 .try-it-menu {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
-  z-index: 50;
-  width: 300px;
+  left: 0;
+  right: auto;
+
+  z-index: 100;
+  width: min(300px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  max-height: min(420px, calc(100vh - 32px));
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
   padding: 6px;
+
   background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
   border: 1px solid hsl(var(--border));
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
 
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
+
   transform: translateY(-6px);
+  transform-origin: top left;
+
   transition:
     opacity .15s ease,
     transform .15s ease,
@@ -2559,14 +2575,17 @@
 .try-it-wrapper.open .try-it-menu {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transform: translateY(0);
 }
 
 .try-it-option {
   display: block;
+  width: 100%;
   padding: 10px 12px;
   border-radius: 8px;
   color: hsl(var(--card-foreground));
+  text-decoration: none;
   transition: background-color .15s ease;
 }
 
@@ -2588,14 +2607,17 @@
   line-height: 1.35;
 }
 
+/* Keep the dropdown inside the viewport on small screens */
 @media (max-width: 500px) {
   .try-it-menu {
-    right: auto;
     left: 0;
-    width: min(300px, calc(100vw - 48px));
+    right: auto;
+    width: min(300px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
   }
 }
 
+/* Very small screens */
 @media (max-width: 459px) {
   nav > a:not(:first-child) span,
   nav > div span {
@@ -2610,14 +2632,6 @@
     justify-content: center;
   }
 
-@media (max-width: 459px) {
-  /* Hide navbar button text */
-  nav > a:not(:first-child) span,
-  nav > div span {
-    display: none;
-  }
-
-  /* Make Lucide icons bigger, but don't affect cattymod.svg */
   nav a svg.lucide {
     width: 24px !important;
     height: 24px !important;
