@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CattyMod Feedback</title>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #0f172a;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.25), transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.2), transparent 35%),
+        linear-gradient(135deg, #eff6ff, #dbeafe);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 520px;
+      padding: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow:
+        0 25px 70px rgba(30, 64, 175, 0.18),
+        0 8px 25px rgba(15, 23, 42, 0.08);
+    }
+
+    .icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      color: white;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    .icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(25px, 5vw, 32px);
+      letter-spacing: -0.8px;
+    }
+
+    .subtitle {
+      margin: 10px 0 30px;
+      text-align: center;
+      color: #64748b;
+      font-size: 15px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .feedback-button {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      padding: 16px 18px;
+      border: 1px solid #dbeafe;
+      border-radius: 16px;
+      background: white;
+      color: #172554;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease;
+    }
+
+    .feedback-button:hover {
+      transform: translateY(-3px);
+      border-color: #93c5fd;
+      background: #f8fbff;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.13);
+    }
+
+    .feedback-button:active {
+      transform: translateY(-1px);
+    }
+
+    .button-icon {
+      width: 45px;
+      height: 45px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 13px;
+      color: #2563eb;
+      background: #eff6ff;
+    }
+
+    .button-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .button-text {
+      flex: 1;
+    }
+
+    .button-title {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .button-description {
+      display: block;
+      margin-top: 3px;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .arrow {
+      color: #94a3b8;
+      transition: transform 0.18s ease, color 0.18s ease;
+    }
+
+    .feedback-button:hover .arrow {
+      color: #2563eb;
+      transform: translateX(4px);
+    }
+
+    .footer {
+      margin-top: 26px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 12px;
+    }
+
+    /* Popup overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      z-index: 1000;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 420px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow:
+        0 30px 80px rgba(15, 23, 42, 0.25),
+        0 10px 30px rgba(15, 23, 42, 0.12);
+      transform: translateY(10px) scale(0.98);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-overlay.show .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-icon {
+      width: 52px;
+      height: 52px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15px;
+      color: #2563eb;
+      background: #eff6ff;
+    }
+
+    .modal-icon svg {
+      width: 25px;
+      height: 25px;
+    }
+
+    .modal h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.4px;
+    }
+
+    .modal p {
+      margin: 10px 0 24px;
+      color: #64748b;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .modal-button {
+      width: 100%;
+      padding: 13px 18px;
+      border: 0;
+      border-radius: 13px;
+      background: #2563eb;
+      color: white;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+
+    .modal-button:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 30px 20px;
+        border-radius: 23px;
+      }
+
+      .modal {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="card">
+
+    <div class="icon">
+      <i data-lucide="message-square-more"></i>
+    </div>
+
+    <h1>Where would you like to give feedback?</h1>
+
+    <p class="subtitle">
+      Choose where you'd like to send your CattyMod feedback.
+    </p>
+
+    <div class="buttons">
+
+      <!-- Scratch -->
+      <button
+        class="feedback-button"
+        onclick="location.href='https://scratch.mit.edu/projects/1335032585/'"
+      >
+        <div class="button-icon">
+          <i data-lucide="scratch-blocks"></i>
+        </div>
+
+        <div class="button-text">
+          <span class="button-title">Scratch</span>
+          <span class="button-description">
+            Give feedback through the CattyMod Scratch project
+          </span>
+        </div>
+
+        <i class="arrow" data-lucide="arrow-up-right"></i>
+      </button>
+
+      <!-- CattyMod Community -->
+      <button
+        class="feedback-button"
+        onclick="showCommunityPopup()"
+      >
+        <div class="button-icon">
+          <i data-lucide="messages-square"></i>
+        </div>
+
+        <div class="button-text">
+          <span class="button-title">CattyMod Community</span>
+          <span class="button-description">
+            Give feedback through the CattyMod community
+          </span>
+        </div>
+
+        <i class="arrow" data-lucide="arrow-up-right"></i>
+      </button>
+
+    </div>
+
+    <div class="footer">
+      CattyMod
+    </div>
+
+  </main>
+
+  <!-- Community popup -->
+  <div
+    id="communityModal"
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="communityModalTitle"
+  >
+    <div class="modal">
+
+      <div class="modal-icon">
+        <i data-lucide="messages-square"></i>
+      </div>
+
+      <h2 id="communityModalTitle">CattyMod Community</h2>
+
+      <p>
+        To give feedback on the CattyMod Community, scroll down to
+        <strong>CattyMod Feedback</strong> once you get there.
+      </p>
+
+      <button
+        class="modal-button"
+        onclick="goToCommunity()"
+      >
+        OK
+      </button>
+
+    </div>
+  </div>
+
+  <script>
+    function showCommunityPopup() {
+      document
+        .getElementById("communityModal")
+        .classList.add("show");
+    }
+
+    function goToCommunity() {
+      location.href = "https://community.cattymod.app";
+    }
+
+    // Close popup when clicking outside the modal
+    document
+      .getElementById("communityModal")
+      .addEventListener("click", function(event) {
+        if (event.target === this) {
+          this.classList.remove("show");
+        }
+      });
+
+    // Close popup with Escape
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        document
+          .getElementById("communityModal")
+          .classList.remove("show");
+      }
+    });
+
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
