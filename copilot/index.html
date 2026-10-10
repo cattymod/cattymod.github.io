@@ -14,6 +14,8 @@
 <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/lib/highlight.min.js"></script>
 <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
 
+    <script src="https://cattymod.app/assets/navbar.js" defer></script>
+
 <style>
 :root {
   color-scheme: dark;
@@ -93,7 +95,7 @@ svg {
   overflow: hidden;
   border: 1px solid #388bfd70;
   border-radius: 8px;
-  background: #fff;
+  background: #000;
 }
 
 .brand-icon img {
@@ -716,7 +718,7 @@ main {
 <div class="app">
   <header class="topbar">
     <div class="brand-icon">
-      <img src="https://cattymod.app/assets/cattymod.svg" alt="CattyMod">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1ib3QgcHJldmlldy1pY29uIj48cGF0aCBkPSJNMTIgOFY0SDgiLz48cmVjdCB3aWR0aD0iMTYiIGhlaWdodD0iMTIiIHg9IjQiIHk9IjgiIHJ4PSIyIi8+PHBhdGggZD0iTTIgMTRoMiIvPjxwYXRoIGQ9Ik0yMCAxNGgyIi8+PHBhdGggZD0iTTE1IDEzdjIiLz48cGF0aCBkPSJNOSAxM3YyIi8+PC9zdmc+" alt="CattyMod">
     </div>
 
     <div>
@@ -852,11 +854,11 @@ import { CreateMLCEngine } from
 
 const MODEL = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
 
-const SYSTEM = `You are CattyMod Copilot, a friendly, playful, encouraging helper for Scratch and CattyMod creators.
+const SYSTEM = `You are CattyMod Copilot, a friendly, playful, encouraging helper for CattyMod creators.
 
 CattyMod is a Scratch mod that supercharges projects with features to help them run faster and better. Its community is at https://cattymod.app/explore and its feedback page is https://cattymod.app/feedback.
 
-Your job is to help users brainstorm, understand Scratch concepts, plan projects, reason about bugs, and learn how to improve their work.
+Your job is to help users brainstorm, understand Scratch concepts (but call them CattyMod Concepts), plan projects, reason about bugs, and learn how to improve their work.
 
 You can explain code and give example snippets, but you cannot directly write into or edit their projects. Never claim you modified a project.
 
@@ -874,7 +876,7 @@ FORMATTING:
 - Never wrap the entire response in a code fence.
 - Do not print literal escape sequences for Markdown.
 - Keep answers focused and helpful.
-- Do not claim you can see or change a project unless its contents were provided. You can publish projects (or more like... the user can) by going to cattymod.app/explore and then clicking the Post button and make sure to select the Projects section. Also do not call yourself "CattyMod". CattyMod is a scratch mod, not you. You're made by CattyMod, which is by Noahscratch493. ALWAYS format "Noahscratch493" like that and he is one person. Also on CattyMod, you do not make features. You use features to make projects. Also CattyMod is free.`;
+- Do not claim you can see or change a project unless its contents were provided. You can publish projects (or more like... the user can) by going to cattymod.app/explore and then clicking the Post button and make sure to select the Projects section. Also do not call yourself "CattyMod". CattyMod is a scratch mod, not you. You're made by CattyMod, which is by Noahscratch493. ALWAYS format "Noahscratch493" like that and he is one person. Also on CattyMod, you do not make features. You use features to make projects. Also CattyMod is free. Keep responses short.`;
 
 const $ = id => document.getElementById(id);
 const chat = $("chat");
