@@ -137,13 +137,13 @@
         /*
          * Mobile navbar mechanism
          *
-         * At widths of 459px or less:
+         * At widths of 500px or less:
          * - Hide the text labels for navbar buttons
          * - Keep the CattyMod logo visible
          * - Increase Lucide icons to 24x24
          * - Do not affect cattymod.svg
          */
-        @media (max-width: 459px) {
+        @media (max-width: 500px) {
             .cattymod-navbar-wrapper nav > a:not(:first-child) span,
             .cattymod-navbar-wrapper nav > div span {
                 display: none;
