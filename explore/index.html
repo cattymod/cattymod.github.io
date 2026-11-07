@@ -22,19 +22,18 @@
 
         .padlet-embed {
             width: 100%;
-            height: 100%;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 2px;
-            overflow: hidden;
+            height: calc(100dvh - var(--top-offset, 0px));
             position: relative;
             background: #F4F4F4;
         }
 
         .padlet-embed iframe {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
-            display: block;
             border: 0;
+            display: block;
         }
     </style>
 </head>
@@ -46,6 +45,44 @@
             allow="camera; microphone; geolocation; display-capture; clipboard-write">
         </iframe>
     </div>
+
+    <script>
+        function updatePadletHeight() {
+            const navbar = document.querySelector('.cattymod-navbar-wrapper');
+            const notice = document.querySelector('.cattymod-external-notice');
+
+            let offset = 0;
+
+            if (navbar) {
+                offset += navbar.getBoundingClientRect().height;
+            }
+
+            if (notice) {
+                offset += notice.getBoundingClientRect().height;
+            }
+
+            document.documentElement.style.setProperty(
+                '--top-offset',
+                offset + 'px'
+            );
+        }
+
+        // Wait for navbar.js to insert its elements
+        window.addEventListener('load', () => {
+            updatePadletHeight();
+
+            const observer = new MutationObserver(updatePadletHeight);
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['class', 'style']
+            });
+
+            window.addEventListener('resize', updatePadletHeight);
+        });
+    </script>
 
 </body>
 </html>
