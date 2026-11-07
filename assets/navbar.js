@@ -224,6 +224,7 @@
 
             <a
                 href="https://cattymod.app/explore/"
+                target="_blank"
                 rel="noopener noreferrer"
                 class="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
