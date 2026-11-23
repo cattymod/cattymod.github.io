@@ -353,6 +353,11 @@
         height: auto
       }
 
+      iframe {
+        max-width: 100%;
+        height: auto
+      }
+
       [hidden]:where(:not([hidden=until-found])) {
         display: none
       }
@@ -769,6 +774,10 @@
       }
 
       .aspect-video {
+        aspect-ratio: 16 / 9
+      }
+
+      .aspect-iframe {
         aspect-ratio: 16 / 9
       }
 
