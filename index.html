@@ -1,279 +1,669 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CattyMod - Home</title>
-    <meta name="description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and TurboWarp.">
-    <meta name="author" content="CattyMod">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="CattyMod - Block-based coding that works">
-    <meta name="twitter:title" content="CattyMod - Block-based coding that works">
-    <meta property="og:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and TurboWarp.">
-    <meta name="twitter:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and TurboWarp.">
-    <link rel="stylesheet" href="https://cattymod.app/assets/styles.css">
-  </head>
-  <body>
-    <div id="root">
-      <!-- Toast Notification Container -->
-      <div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events: none;">
-        <ol tabindex="-1" class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]"></ol>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CattyMod - Home</title>
+
+  <meta name="description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and TurboWarp.">
+  <meta name="author" content="CattyMod">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CattyMod - Block-based coding that works">
+  <meta name="twitter:title" content="CattyMod - Block-based coding that works">
+  <meta property="og:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and TurboWarp.">
+  <meta name="twitter:description" content="CattyMod is a Scratch mod for block-based coding that works. Based on Scratch and TurboWarp.">
+
+  <link rel="stylesheet" href="https://cattymod.app/assets/styles.css">
+
+  <style>
+    .catty-video-tab {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 2px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .catty-video-tab:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .catty-video-tab.active {
+      background: white;
+      color: #333;
+      border-color: white;
+    }
+
+    .catty-video-tab:focus-visible {
+      outline: 3px solid white;
+      outline-offset: 3px;
+    }
+
+    .catty-video-panel {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .catty-video-panel video,
+    .catty-video-panel iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .catty-video-panel[hidden] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+
+    <!-- Toast Notification Container -->
+    <div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events: none;">
+      <ol tabindex="-1" class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]"></ol>
+    </div>
+
+    <section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false"></section>
+
+    <!-- Main Container -->
+    <div class="min-h-screen bg-background">
+
+      <!-- Navbar -->
+      <script src="https://cattymod.app/assets/navbar.js"></script>
+
+      <!-- Top Banner -->
+      <div id="banner" class="flex items-center justify-center gap-4 bg-banner px-6 py-3">
+
+        <img src="https://cattymod.app/assets/happy.svg" alt="Happy Face" class="h-10 w-10 rounded">
+
+        <p class="text-sm text-banner-foreground">
+          Try CattyMod's other apps - Scrooch and XDTube!
+        </p>
+
+        <a href="https://me.cattymod.app" target="_blank" rel="noopener noreferrer" class="shrink-0 rounded-lg border-2 border-banner-foreground/60 px-5 py-1.5 text-sm font-semibold text-banner-foreground transition-colors hover:bg-banner-foreground/10">
+          Open Launcher
+        </a>
+
+        <button onclick="dismissBanner()" class="ml-2 shrink-0 rounded-full p-1 text-banner-foreground/70 transition-colors hover:bg-banner-foreground/10 hover:text-banner-foreground" aria-label="Dismiss banner">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-5 w-5">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+
       </div>
-      <section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false"></section>
-      <!-- Main Container -->
-      <div class="min-h-screen bg-background">
-        
-        <!-- Navbar -->
-<script src="https://cattymod.app/assets/navbar.js"></script>
-        
-        <!-- Top Banner -->
-        <div id="banner" class="flex items-center justify-center gap-4 bg-banner px-6 py-3">
-          <img src="https://cattymod.app/assets/happy.svg" alt="Happy Face" class="h-10 w-10 rounded">
-          <p class="text-sm text-banner-foreground">Try CattyMod's other apps - Scrooch and XDTube!</p>
-          <a href="https://me.cattymod.app" target="_blank" rel="noopener noreferrer" class="shrink-0 rounded-lg border-2 border-banner-foreground/60 px-5 py-1.5 text-sm font-semibold text-banner-foreground transition-colors hover:bg-banner-foreground/10">Open Launcher</a>
-          <button onclick="dismissBanner()" class="ml-2 shrink-0 rounded-full p-1 text-banner-foreground/70 transition-colors hover:bg-banner-foreground/10 hover:text-banner-foreground" aria-label="Dismiss banner">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-5 w-5">
-              <path d="M18 6 6 18"></path>
-              <path d="m6 6 12 12"></path>
-            </svg>
-          </button>
-        </div>
-        <!-- Hero Section -->
-        <section class="relative flex items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-primary via-hero to-accent px-6 md:px-16">
-          <div class="relative z-10 flex w-full max-w-7xl flex-col md:flex-row items-center justify-between gap-12">
-            <div class="max-w-xl text-center md:text-left">
-              <h1 class="text-4xl font-bold leading-tight text-hero-foreground md:text-6xl">Block-based coding with tons of capabilities</h1>
-              <p class="mt-4 text-xl font-bold text-hero-foreground md:text-2xl">Built on top of <a href="https://scratch.mit.edu" target="_blank" rel="noopener noreferrer" class="underline decoration-2 underline-offset-4 hover:opacity-80">Scratch</a>. </p>
-<!-- Try it out split button -->
-<div class="try-it-wrapper">
-  <a href="https://studio.cattymod.app" class="try-it-main">
-    <img src="https://cattymod.app/assets/tryit-DIDgsSnQ.png" alt="" class="h-7 w-7 rounded">
-    <span>Try it out</span>
-  </a>
 
-  <button
-    type="button"
-    class="try-it-dropdown-button"
-    aria-label="Choose CattyMod version"
-    aria-expanded="false"
-    onclick="toggleTryItDropdown(event)"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-      viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="m6 9 6 6 6-6"></path>
-    </svg>
-  </button>
+      <!-- Hero Section -->
+      <section class="relative flex items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-primary via-hero to-accent px-6 md:px-16">
 
-  <div class="try-it-menu" id="tryItMenu">
-    <a href="https://beta.cattymod.app" class="try-it-option">
-      <span>
-        <strong>🧪 Beta</strong>
-        <small>Experimental Editor</small>
-      </span>
-    </a>
+        <div class="relative z-10 flex w-full max-w-7xl flex-col md:flex-row items-center justify-between gap-12">
 
-    <a href="https://cattymod.app/previous" class="try-it-option">
-      <span>
-        <strong>⏮️ Previous</strong>
-        <small>CattyMod built on Scrooch 3</small>
-      </span>
-    </a>
-  </div>
-</div>
-            </div>
-            <div class="w-full max-w-xl">
-              <div class="rounded-xl overflow-hidden shadow-2xl">
-                <video src="https://cattymod.app/assets/intro.mp4" autoplay loop playsinline muted style="width: 100%; height: 100%; object-fit: cover;"></video>
+          <!-- Hero Text -->
+          <div class="max-w-xl text-center md:text-left">
+
+            <h1 class="text-4xl font-bold leading-tight text-hero-foreground md:text-6xl">
+              Block-based coding with tons of capabilities
+            </h1>
+
+            <p class="mt-4 text-xl font-bold text-hero-foreground md:text-2xl">
+              Built on top of
+              <a href="https://scratch.mit.edu" target="_blank" rel="noopener noreferrer" class="underline decoration-2 underline-offset-4 hover:opacity-80">
+                Scratch</a>.
+            </p>
+
+            <!-- Try it out split button -->
+            <div class="try-it-wrapper">
+
+              <a href="https://studio.cattymod.app" class="try-it-main">
+                <img src="https://cattymod.app/assets/tryit-DIDgsSnQ.png" alt="" class="h-7 w-7 rounded">
+                <span>Try it out</span>
+              </a>
+
+              <button
+                type="button"
+                class="try-it-dropdown-button"
+                aria-label="Choose CattyMod version"
+                aria-expanded="false"
+                onclick="toggleTryItDropdown(event)"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+
+              <div class="try-it-menu" id="tryItMenu">
+
+                <a href="https://beta.cattymod.app" class="try-it-option">
+                  <span>
+                    <strong>🧪 Beta</strong>
+                    <small>Experimental Editor</small>
+                  </span>
+                </a>
+
+                <a href="https://cattymod.app/previous" class="try-it-option">
+                  <span>
+                    <strong>⏮️ Previous</strong>
+                    <small>CattyMod built on Scrooch 3</small>
+                  </span>
+                </a>
+
               </div>
             </div>
           </div>
-          <!-- Ambient Glow Orbs -->
-          <div class="pointer-events-none absolute -right-20 -top-20 h-[500px] w-[500px] rounded-full bg-accent/20"></div>
-          <div class="pointer-events-none absolute -bottom-32 right-40 h-[300px] w-[300px] rounded-full bg-primary/20"></div>
-          <div class="pointer-events-none absolute -right-32 -top-32 h-[600px] w-[600px] rounded-full bg-accent/20 blur-3xl"></div>
-          <div class="pointer-events-none absolute -bottom-40 right-32 h-[400px] w-[400px] rounded-full bg-primary/20 blur-2xl"></div>
-        </section>
-        <!-- Links Bar -->
-        <section class="flex flex-wrap items-center justify-center gap-4 bg-muted px-6 py-6">
-          <a href="https://github.com/cattymod/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml-icon lucide-code-xml">
-              <path d="m18 16 4-4-4-4" />
-              <path d="m6 8-4 4 4 4" />
-              <path d="m14.5 4-5 16" />
-            </svg> GitHub </a>
-          <a href="https://studio.cattymod.app/credits.html" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-              <path d="M16 3.128a4 4 0 0 1 0 7.744" />
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-              <circle cx="9" cy="7" r="4" />
-            </svg> Credits </a>
-          <a href="https://cattymod.app/extensions/" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-plus-icon lucide-package-plus"><path d="M12 22V12"/><path d="M16 17h6"/><path d="M19 14v6"/><path d="M21 10.535V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.675-.955"/><path d="M3.29 7 12 12l8.71-5"/><path d="m7.5 4.27 8.997 5.148"/></svg> Extensions </a>
-          <a href="https://cattymod.app/desktop" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor-icon lucide-monitor">
-              <rect width="20" height="14" x="2" y="3" rx="2" />
-              <line x1="8" x2="16" y1="21" y2="21" />
-              <line x1="12" x2="12" y1="17" y2="21" />
-            </svg> Desktop </a>
-          <a href="https://cattymod.app/docs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-text-icon lucide-book-open-text">
-              <path d="M12 5v16" />
-              <path d="M16 13h2" />
-              <path d="M16 9h2" />
-              <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" />
-              <path d="M6 13h2" />
-              <path d="M6 9h2" />
-            </svg> Docs </a>
-          <a href="https://scratch2.cattymod.app" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tv-minimal"><path d="M7 21h10"/><rect width="20" height="14" x="2" y="3" rx="2"/></svg>            Scratch 2 </a>
-            <a href="https://cattymod.app/packager" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-blocks-icon lucide-blocks"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/><rect x="14" y="2" width="8" height="8" rx="1"/></svg>
-            Packager </a>
-          <a href="https://cattymod.app/copilot/" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot preview-icon"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>  Copilot </a>
+
+          <!-- Video Tabs -->
+          <div class="w-full max-w-xl">
+
+            <div class="flex gap-2 mb-3" role="tablist" aria-label="CattyMod videos">
+
+              <button
+                type="button"
+                id="introTab"
+                class="catty-video-tab"
+                role="tab"
+                aria-selected="false"
+                aria-controls="introPanel"
+                onclick="switchCattyTab('intro')"
+              >
+                Intro
+              </button>
+
+              <button
+                type="button"
+                id="whatTab"
+                class="catty-video-tab active"
+                role="tab"
+                aria-selected="true"
+                aria-controls="whatPanel"
+                onclick="switchCattyTab('what')"
+              >
+                What is CattyMod?
+              </button>
+
+            </div>
+
+            <!-- Video Container -->
+            <div class="rounded-xl overflow-hidden shadow-2xl">
+
+              <!-- Intro Video -->
+              <div
+                id="introPanel"
+                class="catty-video-panel"
+                role="tabpanel"
+                aria-labelledby="introTab"
+                hidden
+              >
+                <video
+                  id="introVideo"
+                  src="https://cattymod.app/assets/intro.mp4"
+                  autoplay
+                  loop
+                  playsinline
+                  muted
+                  style="object-fit: cover;"
+                ></video>
+              </div>
+
+              <!-- What is CattyMod? -->
+              <!-- The iframe is created dynamically by JavaScript -->
+              <div
+                id="whatPanel"
+                class="catty-video-panel"
+                role="tabpanel"
+                aria-labelledby="whatTab"
+              ></div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Ambient Glow Orbs -->
+        <div class="pointer-events-none absolute -right-20 -top-20 h-[500px] w-[500px] rounded-full bg-accent/20"></div>
+        <div class="pointer-events-none absolute -bottom-32 right-40 h-[300px] w-[300px] rounded-full bg-primary/20"></div>
+        <div class="pointer-events-none absolute -right-32 -top-32 h-[600px] w-[600px] rounded-full bg-accent/20 blur-3xl"></div>
+        <div class="pointer-events-none absolute -bottom-40 right-32 h-[400px] w-[400px] rounded-full bg-primary/20 blur-2xl"></div>
+
+      </section>
+
+      <!-- Links Bar -->
+      <section class="flex flex-wrap items-center justify-center gap-4 bg-muted px-6 py-6">
+
+        <a href="https://github.com/cattymod/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 16 4-4-4-4"></path>
+            <path d="m6 8-4 4 4 4"></path>
+            <path d="m14.5 4-5 16"></path>
+          </svg>
+          GitHub
+        </a>
+
+        <a href="https://studio.cattymod.app/credits.html" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+          </svg>
+          Credits
+        </a>
+
+        <a href="https://cattymod.app/extensions/" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22V12"></path>
+            <path d="M16 17h6"></path>
+            <path d="M19 14v6"></path>
+            <path d="M21 10.535V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.675-.955"></path>
+            <path d="M3.29 7 12 12l8.71-5"></path>
+            <path d="m7.5 4.27 8.997 5.148"></path>
+          </svg>
+          Extensions
+        </a>
+
+        <a href="https://cattymod.app/desktop" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+            <line x1="8" x2="16" y1="21" y2="21"></line>
+            <line x1="12" x2="12" y1="17" y2="21"></line>
+          </svg>
+          Desktop
+        </a>
+
+        <a href="https://cattymod.app/docs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v16"></path>
+            <path d="M16 13h2"></path>
+            <path d="M16 9h2"></path>
+            <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"></path>
+            <path d="M6 13h2"></path>
+            <path d="M6 9h2"></path>
+          </svg>
+          Docs
+        </a>
+
+        <a href="https://scratch2.cattymod.app" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 21h10"></path>
+            <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+          </svg>
+          Scratch 2
+        </a>
+
+        <a href="https://cattymod.app/packager" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"></path>
+            <rect x="14" y="2" width="8" height="8" rx="1"></rect>
+          </svg>
+          Packager
+        </a>
+
+        <a href="https://cattymod.app/copilot/" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 8V4H8"></path>
+            <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+            <path d="M2 14h2"></path>
+            <path d="M20 14h2"></path>
+            <path d="M15 13v2"></path>
+            <path d="M9 13v2"></path>
+          </svg>
+          Copilot
+        </a>
+
         <a href="https://mirror.cattymod.app" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mirror-rectangular preview-icon"><path d="M11 6 8 9"/><path d="m16 7-8 8"/><rect x="4" y="2" width="16" height="20" rx="2"/></svg>            Mirror </a>
-<a href="https://stats.uptimerobot.com/35gZLXbpot" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell-dot preview-icon"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M11.68 2.009A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673c-.824-.85-1.678-1.731-2.21-3.348"/><circle cx="18" cy="5" r="3"/></svg>            Status </a>
-          
-        </section>
-        <!-- News Grid -->
-        <section class="bg-background px-6 py-10">
-          <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
-            <div class="rounded-lg bg-card p-5 border border-border">
-              <div class="flex items-center justify-between">
-                <h2 class="text-base font-bold text-foreground">What's new?</h2>
-              </div>
-              <div class="mt-4">
-                <p class="text-sm text-muted-foreground">You can now switch the Trampoline (Servers) CattyMod uses.</p>
-              </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 6 8 9"></path>
+            <path d="m16 7-8 8"></path>
+            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+          </svg>
+          Mirror
+        </a>
+
+        <a href="https://stats.uptimerobot.com/35gZLXbpot" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
+            <path d="M11.68 2.009A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673c-.824-.85-1.678-1.731-2.21-3.348"></path>
+            <circle cx="18" cy="5" r="3"></circle>
+          </svg>
+          Status
+        </a>
+
+      </section>
+
+      <!-- News Grid -->
+      <section class="bg-background px-6 py-10">
+
+        <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
+
+          <div class="rounded-lg bg-card p-5 border border-border">
+            <div class="flex items-center justify-between">
+              <h2 class="text-base font-bold text-foreground">What's new?</h2>
             </div>
-            <div class="rounded-lg bg-card p-5 border border-border">
-              <h2 class="text-xs font-bold uppercase tracking-wider text-muted-foreground">CattyNews</h2>
-              <p class="mt-3 text-lg font-bold text-foreground">Custom Mods are now in CattyMod!</p>
-              <p class="mt-1 text-sm text-muted-foreground">You can now add bookmarklets that run on load via Settings -> Mods -> Custom.</p>
-            </div>
-          </div>
-        </section>
-        <!-- Feature Cards Section -->
-        <section class="cm-features-section">
-          <div class="cm-container">
-            <h2 class="cm-section-title">Discover CattyMod</h2>
-            <div class="cm-cards-grid">
-              <!-- Card 1: Hello, Scratch! -->
-              <div class="cm-card cm-slide-fade">
-                <div class="cm-card-icon">🚀</div>
-                <h3>Hiya, Scratch!</h3>
-                <p>Easily load your projects in seconds. Just paste any Scratch link directly into the editor homepage, or swap <code>scratch.mit.edu</code> in your project link with <code>cattymod.app</code>! </p>
-              </div>
-              <!-- Card 2: Extensions -->
-              <div class="cm-card cm-slide-fade">
-                <div class="cm-card-icon">🧩</div>
-                <h3>More Extensions!</h3>
-                <p>Access an expanded library of capabilities. Enjoy seamless support for standard Scratch extensions, TurboWarp extensions, and new CattyMod ones.</p>
-              </div>
-              <!-- Card 3: Customizable -->
-              <div class="cm-card cm-slide-fade">
-                <div class="cm-card-icon">🎨</div>
-                <h3>Customize it!</h3>
-                <p>Make the workspace truly yours. Pick between accent colors, toggle dark mode, and activate built-in Addons to make it your own.</p>
-              </div>
-              <!-- Card 4: Mobile -->
-              <div class="cm-card cm-slide-fade">
-                <div class="cm-card-icon">📱</div>
-                <h3>Mobiles Welcome!</h3>
-                <p>Play Scratch Projects that require a Keyboard via CattyMod's Mobile Controls!</p>
-              </div>
-              <!-- Card 5: Based off TurboWarp -->
-              <div class="cm-card cm-slide-fade">
-                <div class="cm-card-icon">⚡</div>
-                <h3>Run Projects Faster!</h3>
-                <p>CattyMod is based off TurboWarp, a Scratch Mod known for its compiler, so all projects will run just as fast!</p>
-              </div>
-              <!-- Card 6: Sharing -->
-              <div class="cm-card cm-slide-fade">
-                <div class="cm-card-icon">🔍</div>
-                <h3>Share your creations!</h3>
-                <p>Let the world see your brilliant creations, and see what others have made too!</p>
-              </div>
-              <!-- Card 7: Copilot -->
-              <div class="cm-card cm-slide-fade">
-                <div class="cm-card-icon">🍡</div>
-                <h3>CattyMod Copilot</h3>
-                <p>Copilot can assist you with nearly anything, from brainstorming project ideas to coding!</p>
-              </div>
-              <!-- Card 8: There's even more! -->
-              <div class="cm-card cm-slide-fade">
-                <div class="cm-card-icon">▶️</div>
-                <h3>There's even more!</h3>
-                <p>These cards are just the tip of the Iceberg. Click "Try it out" and see the others!</p>
-              </div>
+
+            <div class="mt-4">
+              <p class="text-sm text-muted-foreground">
+                You can now switch the Trampoline (Servers) CattyMod uses.
+              </p>
             </div>
           </div>
-        </section>
-        <!-- Footer Section -->
-        <div class="flex flex-col items-center py-8">
-          <img src="https://cattymod.app/assets/dango/blocks.svg" alt="Dango with blocks around him" class="max-w-full">
-          <p class="mt-4 text-2xl font-bold text-[#7ab2ff]">CattyMod</p>
-          <div class="w-full max-w-2xl mt-4">
-            <hr class="border-border">
-            <p class="mt-4 text-center text-sm text-muted-foreground"> CattyMod is not affiliated with Scratch, the Scratch Team, the Scratch Foundation, or any Scratch mods. <br> Scratch is a project of the Scratch Foundation. It is available for free at <a href="https://scratch.org/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:opacity-80">https://scratch.org/</a>. </p>
+
+          <div class="rounded-lg bg-card p-5 border border-border">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              CattyNews
+            </h2>
+
+            <p class="mt-3 text-lg font-bold text-foreground">
+              Custom Mods are now in CattyMod!
+            </p>
+
+            <p class="mt-1 text-sm text-muted-foreground">
+              You can now add bookmarklets that run on load via Settings -> Mods -> Custom.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Feature Cards Section -->
+      <section class="cm-features-section">
+
+        <div class="cm-container">
+
+          <h2 class="cm-section-title">Discover CattyMod</h2>
+
+          <div class="cm-cards-grid">
+
+            <!-- Card 1 -->
+            <div class="cm-card cm-slide-fade">
+              <div class="cm-card-icon">🚀</div>
+              <h3>Hiya, Scratch!</h3>
+              <p>
+                Easily load your projects in seconds. Just paste any Scratch link directly into the editor homepage, or swap <code>scratch.mit.edu</code> in your project link with <code>cattymod.app</code>!
+              </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="cm-card cm-slide-fade">
+              <div class="cm-card-icon">🧩</div>
+              <h3>More Extensions!</h3>
+              <p>
+                Access an expanded library of capabilities. Enjoy seamless support for standard Scratch extensions, TurboWarp extensions, and new CattyMod ones.
+              </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="cm-card cm-slide-fade">
+              <div class="cm-card-icon">🎨</div>
+              <h3>Customize it!</h3>
+              <p>
+                Make the workspace truly yours. Pick between accent colors, toggle dark mode, and activate built-in Addons to make it your own.
+              </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="cm-card cm-slide-fade">
+              <div class="cm-card-icon">📱</div>
+              <h3>Mobiles Welcome!</h3>
+              <p>
+                Play Scratch Projects that require a Keyboard via CattyMod's Mobile Controls!
+              </p>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="cm-card cm-slide-fade">
+              <div class="cm-card-icon">⚡</div>
+              <h3>Run Projects Faster!</h3>
+              <p>
+                CattyMod is based off TurboWarp, a Scratch Mod known for its compiler, so all projects will run just as fast!
+              </p>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="cm-card cm-slide-fade">
+              <div class="cm-card-icon">🔍</div>
+              <h3>Share your creations!</h3>
+              <p>
+                Let the world see your brilliant creations, and see what others have made too!
+              </p>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="cm-card cm-slide-fade">
+              <div class="cm-card-icon">🍡</div>
+              <h3>CattyMod Copilot</h3>
+              <p>
+                Copilot can assist you with nearly anything, from brainstorming project ideas to coding!
+              </p>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="cm-card cm-slide-fade">
+              <div class="cm-card-icon">▶️</div>
+              <h3>There's even more!</h3>
+              <p>
+                These cards are just the tip of the Iceberg. Click "Try it out" and see the others!
+              </p>
+            </div>
+
           </div>
         </div>
+      </section>
+
+      <!-- Footer Section -->
+      <div class="flex flex-col items-center py-8">
+
+        <img src="https://cattymod.app/assets/dango/blocks.svg" alt="Dango with blocks around him" class="max-w-full">
+
+        <p class="mt-4 text-2xl font-bold text-[#7ab2ff]">
+          CattyMod
+        </p>
+
+        <div class="w-full max-w-2xl mt-4">
+          <hr class="border-border">
+
+          <p class="mt-4 text-center text-sm text-muted-foreground">
+            CattyMod is not affiliated with Scratch, the Scratch Team, the Scratch Foundation, or any Scratch mods.
+            <br>
+            Scratch is a project of the Scratch Foundation. It is available for free at
+            <a href="https://scratch.org/" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:opacity-80">
+              https://scratch.org/
+            </a>.
+          </p>
+        </div>
+
       </div>
     </div>
-    <script>
-      const banner = document.getElementById('banner');
-      // Hide the banner if the user dismissed it before
-      if (localStorage.getItem('cattymod-banner-dismissed2') === 'true') {
-        banner.style.display = 'none';
-      }
+  </div>
 
-      function dismissBanner() {
-        banner.style.display = 'none';
-        localStorage.setItem('cattymod-banner-dismissed2', 'true');
-      }
-      document.addEventListener('DOMContentLoaded', () => {
-        const cards = document.querySelectorAll('.cm-slide-fade');
-        const observerOptions = {
-          root: null,
-          threshold: 0.15 // Trigger when 15% of the card is visible
-        };
-        const observer = new IntersectionObserver((entries, obs) => {
-          entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-              // Stagger card entrance animations slightly
-              setTimeout(() => {
-                entry.target.classList.add('cm-visible');
-              }, index * 100);
-              obs.unobserve(entry.target);
-            }
-          });
-        }, observerOptions);
-        cards.forEach(card => observer.observe(card));
-      });
-  function toggleTryItDropdown(event) {
-    event.stopPropagation();
+  <script>
+    // ==========================================
+    // Banner dismissal
+    // ==========================================
 
-    const wrapper = document.querySelector('.try-it-wrapper');
-    const button = document.querySelector('.try-it-dropdown-button');
-    const isOpen = wrapper.classList.toggle('open');
+    const banner = document.getElementById('banner');
 
-    button.setAttribute('aria-expanded', isOpen);
-  }
-
-  document.addEventListener('click', (event) => {
-    const wrapper = document.querySelector('.try-it-wrapper');
-
-    if (wrapper && !wrapper.contains(event.target)) {
-      wrapper.classList.remove('open');
-
-      const button = wrapper.querySelector('.try-it-dropdown-button');
-      button.setAttribute('aria-expanded', 'false');
+    if (localStorage.getItem('cattymod-banner-dismissed2') === 'true') {
+      banner.style.display = 'none';
     }
-  });
-    </script>
-  </body>
+
+    function dismissBanner() {
+      banner.style.display = 'none';
+      localStorage.setItem('cattymod-banner-dismissed2', 'true');
+    }
+
+
+    // ==========================================
+    // Video tabs
+    // ==========================================
+
+    const XDTUBE_VIDEO_URL =
+      'https://xdtube.lovable.app/embed/6489c99f-44e0-48be-af72-23953520713d';
+
+    function switchCattyTab(tab) {
+      const introPanel = document.getElementById('introPanel');
+      const whatPanel = document.getElementById('whatPanel');
+
+      const introTab = document.getElementById('introTab');
+      const whatTab = document.getElementById('whatTab');
+
+      const introVideo = document.getElementById('introVideo');
+
+      const isIntro = tab === 'intro';
+
+      // Update panel visibility
+      introPanel.hidden = !isIntro;
+      whatPanel.hidden = isIntro;
+
+      // Update active tab styling
+      introTab.classList.toggle('active', isIntro);
+      whatTab.classList.toggle('active', !isIntro);
+
+      // Update accessibility attributes
+      introTab.setAttribute('aria-selected', String(isIntro));
+      whatTab.setAttribute('aria-selected', String(!isIntro));
+
+      if (isIntro) {
+
+        // Completely destroy the XDTube iframe
+        // Removing it stops the embedded video.
+        whatPanel.replaceChildren();
+
+        // Play the Intro video
+        introVideo.play().catch(() => {});
+
+      } else {
+
+        // Pause the Intro video
+        introVideo.pause();
+
+        // Create a fresh XDTube iframe
+        if (!whatPanel.querySelector('iframe')) {
+
+          const iframe = document.createElement('iframe');
+
+          iframe.width = '560';
+          iframe.height = '315';
+
+          iframe.src = XDTUBE_VIDEO_URL;
+          iframe.title = 'What is CattyMod?';
+
+          iframe.setAttribute('frameborder', '0');
+
+          iframe.setAttribute(
+            'allow',
+            'autoplay; fullscreen; picture-in-picture'
+          );
+
+          iframe.setAttribute('allowfullscreen', '');
+
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.display = 'block';
+          iframe.style.border = '0';
+
+          whatPanel.appendChild(iframe);
+        }
+      }
+
+      // Remember selected tab
+      localStorage.setItem('cattymod-video-tab', tab);
+    }
+
+
+    // ==========================================
+    // Restore previously selected tab
+    // ==========================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const savedTab = localStorage.getItem('cattymod-video-tab');
+
+      switchCattyTab(
+        savedTab === 'intro' ? 'intro' : 'what'
+      );
+
+    });
+
+
+    // ==========================================
+    // Feature card animations
+    // ==========================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const cards = document.querySelectorAll('.cm-slide-fade');
+
+      const observerOptions = {
+        root: null,
+        threshold: 0.15
+      };
+
+      const observer = new IntersectionObserver((entries, obs) => {
+
+        entries.forEach((entry, index) => {
+
+          if (entry.isIntersecting) {
+
+            setTimeout(() => {
+              entry.target.classList.add('cm-visible');
+            }, index * 100);
+
+            obs.unobserve(entry.target);
+          }
+
+        });
+
+      }, observerOptions);
+
+      cards.forEach(card => observer.observe(card));
+
+    });
+
+
+    // ==========================================
+    // Try it dropdown
+    // ==========================================
+
+    function toggleTryItDropdown(event) {
+
+      event.stopPropagation();
+
+      const wrapper = document.querySelector('.try-it-wrapper');
+      const button = document.querySelector('.try-it-dropdown-button');
+
+      const isOpen = wrapper.classList.toggle('open');
+
+      button.setAttribute('aria-expanded', isOpen);
+
+    }
+
+    document.addEventListener('click', (event) => {
+
+      const wrapper = document.querySelector('.try-it-wrapper');
+
+      if (wrapper && !wrapper.contains(event.target)) {
+
+        wrapper.classList.remove('open');
+
+        const button = wrapper.querySelector('.try-it-dropdown-button');
+
+        button.setAttribute('aria-expanded', 'false');
+
+      }
+
+    });
+
+  </script>
+
+</body>
 </html>
